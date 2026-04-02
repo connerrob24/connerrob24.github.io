@@ -1,5 +1,11 @@
 ---
 title: "project"
+image: images/IMG_0314.JPG
+toc: false
+about: 
+  template: jolla
+  image-shape: round
+  image-width: 15em
 ---
 
 This is a Quarto website.
