@@ -1,11 +1,21 @@
 ---
 title: "project"
-image: images/IMG_0314.JPG
+image: images/IMG_3170.PNG
 toc: false
 about: 
   template: jolla
   image-shape: round
   image-width: 15em
+  links:
+    - icon: instagram
+      text: Instagram
+      href: https://www.instagram.com/connerrob24/
+    - icon: github
+      text: Github
+      href: https://github.com/connerrob24/
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/conner-robertson-3297532b8/
 ---
 
 This is a Quarto website.
