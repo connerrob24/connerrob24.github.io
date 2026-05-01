@@ -1,5 +1,32 @@
 ---
-title: "About"
+title: "About Me"
+toc: false
 ---
 
-About this site
+Hello, I’m Conner Robertson — a student-athlete and aspiring business professional with interests in baseball, analytics, entrepreneurship, and technology.
+
+This website highlights my background, projects, and experience. I am especially interested in combining data, performance, and strategy to solve real-world problems.
+
+## Interests
+
+- Business and entrepreneurship projects
+- Baseball performance and player development
+- Data visualization and coding in R
+- Professional portfolio development
+
+## Beyond the classroom
+
+I value teamwork, discipline, and continuous improvement. My experiences in athletics and academics have shaped the way I approach leadership, preparation, and long-term growth.
+
+
+
+*
+
+
+:::{layout-ncol=2}
+![](images/IMG_9159.JPG){.profile-pic}
+
+
+
+![](images/IMG_7592.JPG){.profile-pic}
+:::

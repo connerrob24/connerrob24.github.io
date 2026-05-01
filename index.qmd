@@ -1,23 +1,57 @@
 ---
-title: "project"
-image: images/IMG_3170.PNG
+title: ""
 toc: false
-about: 
-  template: jolla
-  image-shape: round
-  image-width: 15em
-  links:
-    - icon: instagram
-      text: Instagram
-      href: https://www.instagram.com/connerrob24/
-    - icon: github
-      text: Github
-      href: https://github.com/connerrob24/
-    - icon: linkedin
-      text: LinkedIn
-      href: https://www.linkedin.com/in/conner-robertson-3297532b8/
+page-layout: full
 ---
 
-This is a Quarto website.
+::: {.top-hero}
+# Conner Robertson {#home-name}
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+![](images/IMG_3170.jpeg){.profile-photo}
+
+::: {.button-row}
+[Email](mailto:robertco@lawrence.edu){.home-btn}
+[GitHub](https://github.com/connerrob24/){.home-btn target="_blank"}
+[LinkedIn](https://www.linkedin.com/in/conner-robertson-3297532b8/){.home-btn target="_blank"}
+:::
+:::
+
+##
+
+::: {.project-grid}
+
+::: {.project-card}
+### Resume
+
+<i class="bi bi-file-earmark"></i> View my <a href="https://drive.google.com/file/d/1v8BbmGckoAS4CYBgHNIV4Q_UR9RSjBW_/view?usp=sharing" target="_blank">Resume</a>
+
+:::
+
+::: {.project-card}
+### Shiny App Project
+Major League Baseball pitching percentile rankings analysis.
+
+<i class="bi bi-box-arrow-up-right"></i> <a
+href="https://jxajm8-conner-robertson.shinyapps.io/project/" target="_blank">Learn More</a>
+
+:::
+
+::: {.project-card}
+### Background
+Learn more about my interests and professional goals.
+
+<i class="bi bi-box-arrow-up-right"></i> <a
+href="about.qmd" target="_blank">About Me</a>
+
+:::
+
+::: {.project-card .static-card}
+### My Portfolio
+A small collection of moments I have captured.
+
+<i class="bi bi-camera"></i> <a
+href="photography.qmd" target="_blank">View Portfolio</a>
+
+:::
+
+:::

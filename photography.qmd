@@ -1,0 +1,40 @@
+---
+title: ""
+format: html
+page-layout: full
+---
+
+<div class="photo-intro">
+  <h1>My Photography Portfolio</h1>
+  <p>If you can't tell, I am a nature lover</p>
+</div>
+
+<div class="photo-mosaic">
+
+  <div class="photo-item tall"><img src="images/Connor-02.jpeg" onclick="openLightbox(this.src)"></div>
+  <div class="photo-item wide"><img src="images/100_0407.JPG" onclick="openLightbox(this.src)"></div>
+  <div class="photo-item wide"><img src="images/IMG_0471.JPG" onclick="openLightbox(this.src)"></div>
+  <div class="photo-item tall"><img src="images/IMG_1756.jpeg" onclick="openLightbox(this.src)"></div>
+  <div class="photo-item tall"><img src="images/IMG_1799.jpeg" onclick="openLightbox(this.src)"></div>
+  <div class="photo-item wide"><img src="images/IMG_2359.jpeg" onclick="openLightbox(this.src)"></div>
+  <div class="photo-item tall"><img src="images/IMG_2518.jpeg" onclick="openLightbox(this.src)"></div>
+  <div class="photo-item wide"><img src="images/IMG_2703.jpeg" onclick="openLightbox(this.src)"></div>
+  <div class="photo-item tall"><img src="images/IMG_2886.jpeg" onclick="openLightbox(this.src)"></div>
+  <div class="photo-item wide"><img src="images/IMG_7651.JPG" onclick="openLightbox(this.src)"></div>
+
+</div>
+
+<div id="image-lightbox" onclick="closeLightbox()">
+  <img id="lightbox-img">
+</div>
+
+<script>
+function openLightbox(src) {
+  document.getElementById("lightbox-img").src = src;
+  document.getElementById("image-lightbox").style.display = "flex";
+}
+
+function closeLightbox() {
+  document.getElementById("image-lightbox").style.display = "none";
+}
+</script>

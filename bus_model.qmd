@@ -1,0 +1,67 @@
+---
+title: "Unlock Performance Institute"
+about:
+  template: trestles
+toc: true
+format: html
+---
+
+
+## Executive Summary 
+[PDF Document](https://drive.google.com/file/d/1OtXaL1Pi-Lp6udJg5Dxmf-ESdz1Bic1B/view?usp=sharing)
+
+- Unlock Performance Institute is a technology-driven baseball training company focused on advanced pitching development for high school and collegiate athletes.
+
+- UPI was created to fill a gap in amateur baseball training, especially for athletes and Division III programs that often lack access to professional-level resources, structured programming, and advanced performance technology.
+
+- The business combines individualized training plans, pitching analytics, strength development, arm care, and remote coaching to help athletes improve performance while reducing injury risk.
+
+- UPI’s model is built around accessibility, innovation, and customization, giving athletes a more organized and measurable way to train.
+
+- The company plans to grow through in-person training in Colorado, remote programming for athletes nationwide, partnerships with high schools, and long-term consulting relationships with collegiate programs.
+
+## External Market Analysis
+- **BI: Business Implications**
+  - To be successful, UPI must build genuine, long-term relationships with athletes, coaches, and parents. 
+  - The business depends on trust, measurable results, and a training environment that athletes believe will help them improve.
+  - UPI must also maintain consistent program quality, keep up with industry advancements, and retain athletes by regularly updating training systems and staying connected with its community.
+  
+- **KLP: Key Leverage Point**
+  - UPI can use seasonality as an advantage rather than a weakness.
+  - During the baseball season, many competitors experience lower training demand. UPI can use this time to improve programming, build relationships, run clinics, and prepare athletes for off-season development.
+  - By staying active during slower periods, UPI can position itself as the preferred training option when athletes are ready to return to structured development.
+
+- **SCA: Sustainable Competitive Advantage**
+  - UPI’s strongest competitive advantage is its detailed integration of advanced technology with individualized pitching development.
+  - By using tools such as Trackman, Rapsodo, Driveline, and Arm Care, UPI can provide data-driven training that is more specific and measurable than traditional coaching.
+  - This allows the company to personalize each athlete’s plan, track progress, improve performance, and reduce injury risk.
+  - UPI’s focus on pitchers, combined with its technology-based training model and ability to serve both individuals and teams, creates a unique position in the baseball development market.
+  
+## Financial Analysis & Plan
+ - UPI’s financial plan focuses on securing enough startup funding to launch the facility, purchase necessary equipment, and create a strong foundation for long-term growth.
+
+ - The business requires $275,000 in financing, which covers the most important startup needs:
+ 
+::: {.tighter-list} 
+  - Facility rent for 2 years: $150,000
+  - Equipment costs: $106,199
+  - Additional startup costs and buffer: about $18,801
+  
+:::
+
+- **Projected revenue shows strong growth over the first three years:**
+
+::: {.tighter-list}
+  - Year 1: $157,500
+  - Year 2: $337,625
+  - Year 3: $651,500
+  
+:::
+
+The first year is expected to involve heavy reinvestment and lower profitability because of startup costs. However, by years two and three, UPI expects stronger cash flow as the client base grows, services expand, and the business becomes more established.
+
+A few key financial indicators support the company’s long-term potential. UPI projects an average gross profit margin of 49%, an average return on assets of 21%, and an average return on equity of 38% over the first three years. These numbers suggest that, once the business moves past the startup phase, it has the potential to use its assets efficiently and generate strong returns.
+
+The main financial priority is managing cash effectively. UPI expects strong liquidity, but the plan also recognizes that holding too much unused cash could be inefficient. As the business grows, extra cash should be reinvested into equipment, technology, facility improvements, marketing, or investor returns.
+
+

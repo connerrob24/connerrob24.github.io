@@ -3,20 +3,28 @@ project:
   output-dir: docs
 
 website:
-  title: "project"
+  title: "Conner Robertson"
   navbar:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+      - href: about.qmd
+        text: About
+      - text: Other Projects
+        menu: 
+          - href: tr_project.qmd
+            text: Timber Rattlers Practicum
+          - href: bus_model.qmd
+            text: Business & Entrepreneurship UPI Model
+      - text: STAT 405
+        menu:
+          - href: sql_project.qmd
+            text: SQL Database
+
 
 format:
   html:
-    theme:
-      - cosmo
-      - brand
     css: styles.css
     toc: true
-
 
 

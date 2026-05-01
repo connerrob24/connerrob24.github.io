@@ -1,0 +1,122 @@
+---
+title: "SQL Project"
+toc: false
+format: html
+---
+
+<i class="bi bi-github"></i> <a
+href="https://github.com/ADC-405-S26/Project_2_SQL_Team_11" target="_blank">GitHub Repo</a>
+
+```sql
+-- creating a temporary ta ble 'joined_data'
+-- technically a 'CTE'
+-- using this later for second part of queery
+WITH joined_data AS (
+    SELECT
+        p.Season,       
+        p.team_name,    
+        p.ERA,          
+        f.OAA,          -- Outs Above Average
+        f.DRS           -- Defensive Runs Saved
+    FROM team_pitching AS p
+    JOIN team_fielding AS f
+        ON p.Season = f.Season
+       AND p.team_name = f.team_name
+    WHERE p.Season = 2024
+        -- Keep only rows from the 2024 season.
+    AND f.OAA IS NOT NULL),
+        -- Removing rows where OAA is missing
+-- now creating a second temporary table
+condition_data AS (
+    SELECT
+        Season,
+        team_name,
+        ERA,
+        OAA,
+        DRS,
+        CASE
+            -- CASE works like an if/else statement in SQL
+            WHEN
+                (CASE WHEN OAA >= 25 THEN 1 ELSE 0 END) +
+                (CASE WHEN DRS >= 5 THEN 1 ELSE 0 END) = 2
+            THEN 'Excellent Defense'
+                -- conditions must meet OAA at least 25 and DRS at least 5
+                -- Each inner CASE returns 1 if the condition is true
+                -- and 0 if it is false
+                -- so if the two values add up to 2, both conditions were true and
+                -- that team will retain "Excelletnt Degense" in the defense_tier variable
+            WHEN
+                (CASE WHEN OAA <= 0 THEN 1 ELSE 0 END) +
+                (CASE WHEN DRS <= 0 THEN 1 ELSE 0 END) = 2
+
+            THEN 'Poor Defense'
+                -- same thing as before,
+                -- each condition returns either 1 or 0.
+                -- A total of 2 means both poor-defense conditions were true.
+
+            ELSE 'Mediocre Defense'
+                -- Mediocre Defense when neither condition is true
+                -- So any team that is not Excellent and not Poor becomes
+                -- Mediocre Defense
+        END AS defense_tier
+            -- naming new column as "defense_tier"
+    FROM joined_data)
+-- selecting the final columns for visualization
+SELECT
+    Season,
+    team_name,
+    ERA,
+    defense_tier,
+    CASE
+        -- with this CASE statement, creating order for the defensive categories
+        WHEN defense_tier = 'Poor Defense' THEN 1
+        WHEN defense_tier = 'Mediocre Defense' THEN 2
+        WHEN defense_tier = 'Excellent Defense' THEN 3
+    END AS defense_order
+        -- naming new listing column as defense_order
+FROM condition_data
+    -- using conditional data from earlier
+ORDER BY defense_order, ERA;
+```
+
+The plot below orders teams by ERA, so teams farther left have better run prevention and teams farther right have worse run prevention. The colors represent defensive tiers that were created by combining each team’s OAA (Outs Above Average) and DRS (Defensive Runs Saved) values for the 2024 season. To make these groups, I first joined the 2024 team pitching and team fielding tables so that each row represented one team with both its ERA and defensive metrics. Then, using OAA and DRS, teams were classified into three groups: teams that performed strongly on both defensive measures were labeled Excellent Defense, teams that rated poorly on both were labeled Poor Defense, and teams that were mixed or near the middle were labeled Mediocre Defense. ("High" OAA >= 25, DRS >= 5, "Poor" OAA >= 0, DRS >= 0, and anything being else being considered "Mediocre".
+
+From the visualization, we can see that there is a somewhat positive relationship between the overal defensive performance for a team in 2024 and their overall ERA. Teams in the excellent are split, with half being in the lower range of ERA's and other half being in the higher range. However, more clearly, teams with a "Mediocre" (decent) defensive year tend to appear more often on the lower-ERA side, suggesting better defense is associated with better pitching outcomes. With that, it is important to note that poor defensive teams held mid-to-high ERAs, which is to drastic to completely ignore. But the colors are still fairly mixed across the plot, so defense alone of course does not fully encapsolate a team's ERA for a given year.
+
+Another reason for this is shown in that the mediocre defense group mostly covers a very wide range of ERA values, meaning average defensive teams were not all the same in run prevention. furher demonstrating how factors outside of defense are vitally important: like pitching talent, strikeouts, walks, home runs allowed, etc.
+
+```r
+
+# plotting ERA by team, ordered by ERA and colored by defensive tier
+p1 <- ggplot(defensive_era_analysis, 
+             aes(reorder(team_name, ERA), ERA, color = defense_tier)) +
+  geom_segment(
+    aes(xend = reorder(team_name, ERA), y = 0, yend = ERA),
+    linewidth = 0.7,
+    alpha = 0.7) +
+  
+  geom_point(size = 3) +
+  scale_color_manual(
+    values = c(
+      "Excellent Defense" = "#457B9D",
+      "Mediocre Defense" = "#A8DADC",
+      "Poor Defense" = "#E63946")) +
+  coord_flip() +
+  labs(
+    title = "2024 Team ERA Compared to OAA and BRS Defensive Tiers",
+    subtitle = "Defensive Tiers Calculated By OAA and DRS Averages",
+    x = "Team Average OAA and DRS Tiers",
+    y = "ERA",
+    color = "Defense tier") +
+  theme_grey() +
+  theme(
+    plot.title = element_text(face = "bold"),
+    legend.position = "bottom",
+    legend.background = element_rect(color ="darkgrey"),
+    panel.grid.minor = element_blank(),
+    panel.background = element_rect(color = "darkgrey"),
+    axis.text.y = element_blank())
+
+```
+
+![](images/Screenshot 2026-04-30){.tr-project-card}
