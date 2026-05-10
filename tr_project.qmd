@@ -1,20 +1,33 @@
 ---
 title: ""
+page-layout: full
+toc: false
 about:
   id: intro-heading
   template: trestles
-  image-width: 20em
+  image-width: 25em
   image-shape: round
   image: images/TR_logo.jpeg
   links: 
     - icon: link
       href: https://www.mlb.com/milb/wisconsin
-toc: false
 format: html
 ---
 
 :::{#intro-heading}
 ## Timber Rattlers Practicum Work
+
+**Course:** BUEN 396 Practicum in Business and Entrepreneurship  
+
+**Client:** Wisconsin Timber Rattlers  
+**Affiliation:** Milwaukee Brewers High-A Affiliate  
+**Location:** Appleton, Wisconsin  
+
+**Project Type:** Marketing Research Paper  
+**Focus:** Fan Engagement + College Student Focus <br>
+**My Role:** College Night Survey Team  
+**Research Methods:** Survey Data, Social Media Audit, Market Research  
+:::
 
 **Executive Summary**
 
@@ -23,7 +36,6 @@ engagement, visibility, and overall fandom for the Wisconsin Timber Rattlers, fo
 sports marketing innovation, digital outreach, and new College Night initiatives. Drawing
 from extensive social media analytics, national sports marketing trends, and primary
 survey research, our goal is to modernize how the team connects with key demographics.
-:::
 
 By aligning digital content with fan behavior, activating cause-based and community-
 driven sponsorships, and creating personalized experiences for Gen Z fans, the Timber

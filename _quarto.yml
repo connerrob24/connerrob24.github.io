@@ -20,7 +20,8 @@ website:
         menu:
           - href: sql_project.qmd
             text: SQL Database
-
+          - href: text_analysis.qmd
+            text: Text Analysis
 
 format:
   html:

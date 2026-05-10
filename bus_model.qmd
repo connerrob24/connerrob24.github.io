@@ -1,13 +1,14 @@
 ---
-title: "Unlock Performance Institute"
+title: "Unlock Performance Institute (UPI)"
+page-layout: full
 toc: true
 format: html
 ---
 
 <img src="images/UPI_logo.png" class="page-logo" alt="Unlock Performance Institute logo">
+[PDF Document](https://drive.google.com/file/d/1OtXaL1Pi-Lp6udJg5Dxmf-ESdz1Bic1B/view?usp=sharing)
 
 ## Executive Summary 
-[PDF Document](https://drive.google.com/file/d/1OtXaL1Pi-Lp6udJg5Dxmf-ESdz1Bic1B/view?usp=sharing)
 
 - Unlock Performance Institute is a technology-driven baseball training company focused on advanced pitching development for high school and collegiate athletes.
 
@@ -15,9 +16,6 @@ format: html
 
 - The business combines individualized training plans, pitching analytics, strength development, arm care, and remote coaching to help athletes improve performance while reducing injury risk.
 
-- UPI’s model is built around accessibility, innovation, and customization, giving athletes a more organized and measurable way to train.
-
-- The company plans to grow through in-person training in Colorado, remote programming for athletes nationwide, partnerships with high schools, and long-term consulting relationships with collegiate programs.
 
 ## External Market Analysis
 - **BI: Business Implications**

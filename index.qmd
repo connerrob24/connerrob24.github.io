@@ -36,6 +36,15 @@ href="https://jxajm8-conner-robertson.shinyapps.io/project/" target="_blank">Lea
 
 :::
 
+::: {.project-card .static-card}
+### My Photography Portfolio
+A small collection of moments I have captured.
+
+<i class="bi bi-camera"></i> <a
+href="photography.qmd" target="_blank">View</a>
+
+:::
+
 ::: {.project-card}
 ### Background
 Learn more about my interests and professional goals.
@@ -45,13 +54,6 @@ href="about.qmd" target="_blank">About Me</a>
 
 :::
 
-::: {.project-card .static-card}
-### My Portfolio
-A small collection of moments I have captured.
 
-<i class="bi bi-camera"></i> <a
-href="photography.qmd" target="_blank">View Portfolio</a>
-
-:::
 
 :::

@@ -1,0 +1,20 @@
+---
+title: "Text Analysis Project"
+page-layout: full
+format: html
+---
+
+<i class="bi bi-github"></i> <a
+href="https://github.com/ADC-405-S26/Project_3_TextAnalysis_Team_7" target="_blank">GitHub Repo</a>
+
+## Introduction & Background
+
+Religious texts have shaped history not only through what they say, but also through how they are written. The four Gospels in the Bible are often read together because they each tell the story of Jesus from four different perspectives. While they overlap in many places, they also differ in structure, emphasis, and wording. These differences make the Gospels a useful case for text analysis, where we can compare not just what each Gospel says, but how each one says it. In this blog post, we will use computational tools to explore whether the Gospels’ language patterns reflect their historical and literary relationships. To be more specific, our primary goal is to identify which words and themes are most distinctive from one Gospel to the next, and understand the linguistic differences tied to the unique writing styles of each author.
+
+For some brief context, historians generally agree that Mark was the first gospel to be written, around 70 A.D. Matthew and Luke were written between 80-85 A.D, and are generally believed to have used Mark as a source. These three are known as the synoptic gospels, a term derived from the idea of being “seen together. There are many similarities between these three writings, as they share many of the same stories, structures and, as we see, even wording patterns. Our cluster analysis attempts to quantitatively demonstrate this well-understood belief. 
+
+Apart from these three, there is John. His gospel is believed to have been written last, around 90 A.D. There are many differences between John and the synoptic gospels, for instance, there are several stories told in John that do not appear in the other three, and parts of the chronology are different.
+
+### Data
+
+The data used in this project contains the King James version of the four Gospels: Matthew, Mark, Luke, and John, from Gutenberg metadata. Each observation represents a portion of Gospel text, organized by Gospel and verse-level information. The raw version of our initial dataset includes the Gutenberg-assigned ID for each gospel, the free-form text, the title, and the Gospel name.

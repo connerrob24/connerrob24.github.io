@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Conner Robertson</title>
+<title>Text Analysis Project – Conner Robertson</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -139,45 +139,52 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction-background" id="toc-introduction-background" class="nav-link active" data-scroll-target="#introduction-background">Introduction &amp; Background</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<section id="home-name" class="level1 top-hero">
-<h1>Conner Robertson</h1>
-<p><img src="images/IMG_3170.jpeg" class="profile-photo img-fluid"></p>
-<div class="button-row">
-<p><a href="mailto:robertco@lawrence.edu" class="home-btn">Email</a> <a href="https://github.com/connerrob24/" class="home-btn" target="_blank">GitHub</a> <a href="https://www.linkedin.com/in/conner-robertson-3297532b8/" class="home-btn" target="_blank">LinkedIn</a></p>
-</div>
-</section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
-<div class="project-grid">
-<section id="resume" class="level3 project-card">
-<h3 class="anchored" data-anchor-id="resume">Resume</h3>
-<p><i class="bi bi-file-earmark"></i> View my <a href="https://drive.google.com/file/d/1v8BbmGckoAS4CYBgHNIV4Q_UR9RSjBW_/view?usp=sharing" target="_blank">Resume</a></p>
-</section>
-<section id="shiny-app-project" class="level3 project-card">
-<h3 class="anchored" data-anchor-id="shiny-app-project">Shiny App Project</h3>
-<p>Major League Baseball pitching percentile rankings analysis.</p>
-<p><i class="bi bi-box-arrow-up-right"></i> <a href="https://jxajm8-conner-robertson.shinyapps.io/project/" target="_blank">Learn More</a></p>
-</section>
-<section id="my-photography-portfolio" class="level3 project-card static-card">
-<h3 class="anchored" data-anchor-id="my-photography-portfolio">My Photography Portfolio</h3>
-<p>A small collection of moments I have captured.</p>
-<p><i class="bi bi-camera"></i> <a href="./photography.html" target="_blank">View</a></p>
-</section>
-<section id="background" class="level3 project-card">
-<h3 class="anchored" data-anchor-id="background">Background</h3>
-<p>Learn more about my interests and professional goals.</p>
-<p><i class="bi bi-box-arrow-up-right"></i> <a href="./about.html" target="_blank">About Me</a></p>
-</section>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Text Analysis Project</h1>
 </div>
 
 
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><i class="bi bi-github"></i> <a href="https://github.com/ADC-405-S26/Project_3_TextAnalysis_Team_7" target="_blank">GitHub Repo</a></p>
+<section id="introduction-background" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-background">Introduction &amp; Background</h2>
+<p>Religious texts have shaped history not only through what they say, but also through how they are written. The four Gospels in the Bible are often read together because they each tell the story of Jesus from four different perspectives. While they overlap in many places, they also differ in structure, emphasis, and wording. These differences make the Gospels a useful case for text analysis, where we can compare not just what each Gospel says, but how each one says it. In this blog post, we will use computational tools to explore whether the Gospels’ language patterns reflect their historical and literary relationships. To be more specific, our primary goal is to identify which words and themes are most distinctive from one Gospel to the next, and understand the linguistic differences tied to the unique writing styles of each author.</p>
+<p>For some brief context, historians generally agree that Mark was the first gospel to be written, around 70 A.D. Matthew and Luke were written between 80-85 A.D, and are generally believed to have used Mark as a source. These three are known as the synoptic gospels, a term derived from the idea of being “seen together. There are many similarities between these three writings, as they share many of the same stories, structures and, as we see, even wording patterns. Our cluster analysis attempts to quantitatively demonstrate this well-understood belief.</p>
+<p>Apart from these three, there is John. His gospel is believed to have been written last, around 90 A.D. There are many differences between John and the synoptic gospels, for instance, there are several stories told in John that do not appear in the other three, and parts of the chronology are different.</p>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data">Data</h3>
+<p>The data used in this project contains the King James version of the four Gospels: Matthew, Mark, Luke, and John, from Gutenberg metadata. Each observation represents a portion of Gospel text, organized by Gospel and verse-level information. The raw version of our initial dataset includes the Gutenberg-assigned ID for each gospel, the free-form text, the title, and the Gospel name.</p>
+
+
+</section>
 </section>
 
 </main> <!-- /main -->

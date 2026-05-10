@@ -6,7 +6,7 @@ page-layout: full
 
 <div class="photo-intro">
   <h1>My Photography Portfolio</h1>
-  <p>If you can't tell, I am a nature lover</p>
+  <p>nature, friends, and memories</p>
 </div>
 
 <div class="photo-mosaic">
