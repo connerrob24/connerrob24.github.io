@@ -1,11 +1,10 @@
 ---
 title: "Unlock Performance Institute"
-about:
-  template: trestles
 toc: true
 format: html
 ---
 
+<img src="images/UPI_logo.png" class="page-logo" alt="Unlock Performance Institute logo">
 
 ## Executive Summary 
 [PDF Document](https://drive.google.com/file/d/1OtXaL1Pi-Lp6udJg5Dxmf-ESdz1Bic1B/view?usp=sharing)

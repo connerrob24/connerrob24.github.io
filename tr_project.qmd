@@ -1,10 +1,19 @@
 ---
 title: ""
+about:
+  id: intro-heading
+  template: trestles
+  image-width: 20em
+  image-shape: round
+  image: images/TR_logo.jpeg
+  links: 
+    - icon: link
+      href: https://www.mlb.com/milb/wisconsin
 toc: false
 format: html
 ---
 
-
+:::{#intro-heading}
 ## Timber Rattlers Practicum Work
 
 **Executive Summary**
@@ -14,6 +23,7 @@ engagement, visibility, and overall fandom for the Wisconsin Timber Rattlers, fo
 sports marketing innovation, digital outreach, and new College Night initiatives. Drawing
 from extensive social media analytics, national sports marketing trends, and primary
 survey research, our goal is to modernize how the team connects with key demographics.
+:::
 
 By aligning digital content with fan behavior, activating cause-based and community-
 driven sponsorships, and creating personalized experiences for Gen Z fans, the Timber

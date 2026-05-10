@@ -35,6 +35,18 @@ body {
   padding-left: 0.5em; /* Adjust this value */
 }
 
+.page-logo {
+  position: fixed;
+  top: 115px;
+  left: 25px;
+  width: 180px;
+  height: auto;
+  z-index: 10;
+  border: 1px solid white;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
 /* Navbar */
 .navbar {
   background-color: #ffffff !important;
@@ -109,6 +121,7 @@ p {
 ul {
   line-height: 1.7;
 }
+
 
 /* Links */
 a {
