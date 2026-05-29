@@ -22,6 +22,11 @@ body {
   border-left: 1px solid #872b49 !important;
 }
 
+/* Tab color for panel-tabset */
+.panel-tabset .nav-tabs .nav-link {
+  color: black;
+}
+
 /* Make TOC text bigger */
 #quarto-margin-sidebar .nav-link,
 #TOC .nav-link,

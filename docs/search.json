@@ -1,10 +1,80 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
+    "objectID": "sql_project.html",
+    "href": "sql_project.html",
+    "title": "SQL Project",
+    "section": "",
+    "text": "NOTE: This was a joint project worked on with Brett Hartlaub\nGitHub Repo"
+  },
+  {
+    "objectID": "sql_project.html#data",
+    "href": "sql_project.html#data",
+    "title": "SQL Project",
+    "section": "Data",
+    "text": "Data\nFor this SQL project, we built a small MLB team-statistics database using three datasets pulled from FanGraphs: team batting, team pitching, and team fielding. Using the baseballr package in R, we created a vector of seasons and looped through each year to collect team-level statistics from 2015 through 2024, excluding the shortened 2020 season. Each dataset was cleaned by removing unnecessary columns, renaming variables, and saving the final versions as CSV files before loading them into a DuckDB database. This gave us three connected tables that could be queried with SQL to compare offensive production, pitching performance, and defensive value across MLB teams and seasons.\nyears &lt;- c(2024, 2023, 2022, 2021, 2019, 2018, 2017, 2016, 2015)\n\n- example of looping for the team_pitching data\nteam_pitching_all_unfiltered &lt;- map_dfr(\n  years,\n  ~ fg_team_pitcher(startseason = .x, endseason = .x))\n\nData Cleaning\n# removing unwanted variables \n# (cleaning and renaming variables for database design purposes later)\n\nteam_batting_all &lt;- team_batting_all_unfiltered |&gt;  select(-c(3:7, 19:21, 23, 27:38, 41, 43:51, 55:63, 66:131, 133:135, 137:141, 143:145, 152:278, 280:288, 292:374, 380:440)) |&gt; \n  rename(\n    singles = `1B`,\n    doubles = `2B`,\n    triples = `3B`,\n    avg_stat = AVG,\n    avg_plus = `AVG+`,\n    slg_plus = `SLG+`,\n    hrfb_pct_plus = `HRFB_pct+`,\n    soft_pct_plus = `Soft_pct+`,\n    med_pct_plus = `Med_pct+`,\n    hard_pct_plus = `Hard_pct+`)\n\nSample Table\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSeason\nteam_name\nH\nsingles\ndoubles\ntriples\nHR\nR\nRBI\nBB\nIBB\nSO\nHBP\nSB\navg_stat\nGB\nFB\nSLG\nOPS\nBABIP\nwOBA\nwRAA\nwRC\nWAR\nWAROld\navg_plus\nslg_plus\nhrfb_pct_plus\nsoft_pct_plus\nmed_pct_plus\nhard_pct_plus\nxwOBA\nxAVG\nxSLG\nAvgBatSpeed\nAttackAngle\nAttackDirection\nIdealAttackAngle_pct\nEV\nLA\nBarrels\nBarrel_pct\nmaxEV\n\n\n\n\n2024\nNYY\n1352\n857\n243\n15\n237\n815\n782\n672\n26\n1326\n49\n88\n0.2481\n1776\n1557\n0.4286\n0.7615\n0.2827\n0.3306\n104.7926\n835.3207\n34.5191\n34.1529\n103.4864\n108.6500\n134.2629\n90.7584\n98.7781\n106.9142\n0.3460\n0.2515\n0.4526\n72.1031\n9.9065\n1.6836\n0.5438\n90.1105\n12.7093\n442\n0.1053\n120.0\n\n\n2024\nARI\n1452\n933\n271\n37\n211\n886\n845\n569\n17\n1265\n84\n119\n0.2629\n1866\n1594\n0.4401\n0.7773\n0.3018\n0.3366\n133.0406\n868.1308\n34.3844\n34.7517\n106.5257\n108.9479\n110.8894\n97.0032\n99.0817\n103.0412\n0.3335\n0.2524\n0.4241\n71.5115\n9.5006\n-0.5133\n0.5032\n89.1465\n12.7375\n346\n0.0792\n117.0\n\n\n2024\nLAD\n1423\n873\n291\n26\n233\n842\n815\n602\n33\n1336\n64\n136\n0.2577\n1631\n1691\n0.4464\n0.7812\n0.2972\n0.3371\n136.2452\n867.9430\n32.6877\n35.9570\n104.3981\n110.5171\n115.4272\n92.7457\n99.6529\n104.2426\n0.3382\n0.2523\n0.4444\n71.3356\n9.9072\n-0.4496\n0.4986\n89.3972\n15.5284\n391\n0.0919\n119.2\n\n\n2024\nBAL\n1391\n861\n262\n33\n235\n786\n759\n489\n14\n1359\n64\n98\n0.2499\n1718\n1717\n0.4354\n0.7508\n0.2877\n0.3244\n70.6088\n793.0653\n27.7178\n27.6024\n104.2339\n110.3735\n120.7240\n94.3429\n95.6265\n110.4095\n0.3280\n0.2473\n0.4341\n72.5088\n9.5182\n0.2840\n0.4994\n89.7025\n14.5005\n381\n0.0894\n114.4\n\n\n2024\nMIL\n1359\n900\n249\n33\n177\n777\n742\n597\n19\n1459\n46\n217\n0.2484\n1816\n1438\n0.4030\n0.7285\n0.3054\n0.3185\n41.7954\n763.5501\n27.6815\n26.7425\n100.6138\n99.7635\n103.1123\n104.3568\n98.7264\n99.9167\n0.3143\n0.2378\n0.3925\n71.7573\n9.4352\n-1.1072\n0.5086\n88.6249\n11.5129\n293\n0.0720\n118.1\n\n\n2024\nSDP\n1456\n989\n259\n18\n190\n760\n726\n458\n18\n1077\n56\n120\n0.2635\n1879\n1646\n0.4200\n0.7445\n0.2951\n0.3236\n65.3117\n779.2289\n26.7585\n26.7777\n106.7418\n103.9856\n96.6985\n94.1713\n103.7079\n96.7785\n0.3331\n0.2665\n0.4304\n70.5285\n7.7539\n-1.0671\n0.4811\n89.0992\n13.1784\n321\n0.0711\n116.7\n\n\n\n\n\n\n\nDatabase Designing\n\nBelow is the designing for the team_pitching table (one of three tables being added to the database), which will then be connected to the written csv holding the real data.\n\n-- Re-create with flexible NULL constraints\nCREATE TABLE team_pitching (\n    Season SMALLINT NOT NULL,\n    team_name VARCHAR(50) NOT NULL,\n    W SMALLINT NOT NULL,\n    L SMALLINT NOT NULL,\n    ERA DOUBLE,           \n    G SMALLINT NOT NULL,\n    QS SMALLINT,          \n    CG SMALLINT,          \n    SV SMALLINT,      \n    BS SMALLINT,    \n    H SMALLINT NOT NULL,\n    R SMALLINT NOT NULL,\n    ER SMALLINT NOT NULL,\n    HR SMALLINT NOT NULL,\n    BB SMALLINT NOT NULL,\n    HBP SMALLINT,         \n    BK SMALLINT,          \n    SO SMALLINT NOT NULL,\n    Balls INTEGER,  \n    Strikes INTEGER,      \n    FIP DOUBLE,           \n    LD_pct DOUBLE,       \n    GB_pct DOUBLE,    \n    HR_FB DOUBLE,       \n    FBall_pct DOUBLE,   \n    SL_pct DOUBLE,    \n    CT_pct DOUBLE,     \n    CB_pct DOUBLE,    \n    CH_pct DOUBLE,        \n    K_pct DOUBLE,      \n    Zone_pct DOUBLE,      \n    BB_pct DOUBLE,      \n    \"K-BB_pct\" DOUBLE, \n\n    PRIMARY KEY (Season, team_name));"
+  },
+  {
+    "objectID": "sql_project.html#primary-query",
+    "href": "sql_project.html#primary-query",
+    "title": "SQL Project",
+    "section": "Primary Query",
+    "text": "Primary Query\nThe main goal was to see whether teams with stronger defensive performance also tended to have lower ERAs. To do this, we worked with team-level pitching and fielding data, joining the tables so that each row represented one team with its ERA, OAA, and DRS values. ERA was used as the main measure of run prevention, while OAA and DRS were used to evaluate defensive quality. After combining the data, we created defensive tiers to group teams into Excellent, Mediocre, and Poor Defense, which allowed us to compare overall defensive performance against team ERA in a clearer way.\n\nFirst joining the team_pitching and team_fielding data frames \nKeeping only rows in 2024 season and removing NA’s\n\nWITH joined_data AS (\n    SELECT\n        p.Season,       \n        p.team_name,    \n        p.ERA,          \n        f.OAA,          -- Outs Above Average\n        f.DRS           -- Defensive Runs Saved\n    FROM team_pitching AS p\n    JOIN team_fielding AS f\n        ON p.Season = f.Season\n       AND p.team_name = f.team_name\n    WHERE p.Season = 2024\n    AND f.OAA IS NOT NULL),\n\nNow I am classifying each team into a defensive tier using OAA and DRS.\n\nOAA - A statcast defensive metric measuring how many outs a fielder saves, incorporating range and play difficulty\nDRS - A statistic that measures how many runs a player saves or costs their team compared to an average fielder\n\nThe CASE statement works like an if/else structure: teams with strong values in both metrics are labeled Excellent Defense, teams with weak values in both are labeled Poor Defense, and all others are labeled Mediocre Defense.\nThe new defense_tier variable is then used to color the ERA plot and compare defensive performance with run prevention.\n\nSELECT\n        Season,\n        team_name,\n        ERA,\n        OAA,\n        DRS,\n        CASE\n        \n            WHEN\n                (CASE WHEN OAA &gt;= 25 THEN 1 ELSE 0 END) +\n                (CASE WHEN DRS &gt;= 5 THEN 1 ELSE 0 END) = 2\n            THEN 'Excellent Defense'\n\n            WHEN\n                (CASE WHEN OAA &lt;= 0 THEN 1 ELSE 0 END) +\n                (CASE WHEN DRS &lt;= 0 THEN 1 ELSE 0 END) = 2\n            THEN 'Poor Defense'\n\n            ELSE 'Mediocre Defense'\n\n        END AS defense_tier\n\n    FROM joined_data)\n\nVisualization\nThe plot below orders teams by ERA, with better run prevention on the left and worse run prevention on the right. Each team is colored by a defensive tier created from its 2024 OAA and DRS values. Overall, the visualization suggests that defense may relate to ERA, since poor defensive teams generally appear more often in the mid-to-high ERA range. However, the colors are still mixed across the plot, and even strong or mediocre defensive teams cover a wide range of ERAs. This shows that defense matters, but ERA is also shaped by other factors like pitching talent, strikeouts, walks, and home runs allowed."
+  },
+  {
+    "objectID": "tr_project.html",
+    "href": "tr_project.html",
     "title": "Conner Robertson",
     "section": "",
-    "text": "Email GitHub LinkedIn"
+    "text": "Course: BUEN 396 Practicum in Business and Entrepreneurship\nClient: Wisconsin Timber Rattlers\nAffiliation: Milwaukee Brewers High-A Affiliate\nLocation: Appleton, Wisconsin\nProject Type: Marketing Research Paper\nFocus: Fan Engagement + College Student Focus  My Role: College Night Survey Team\nResearch Methods: Survey Data, Social Media Audit, Market Research\nExecutive Summary\nThis market research paper outlines comprehensive strategies aimed at increasing engagement, visibility, and overall fandom for the Wisconsin Timber Rattlers, focusing on sports marketing innovation, digital outreach, and new College Night initiatives. Drawing from extensive social media analytics, national sports marketing trends, and primary survey research, our goal is to modernize how the team connects with key demographics.\nBy aligning digital content with fan behavior, activating cause-based and community- driven sponsorships, and creating personalized experiences for Gen Z fans, the Timber Rattlers can position themselves as a modern minor league team that fosters loyalty, inclusivity, and excitement. These efforts offer more than short-term attendance boosts— they lay the groundwork for a new generation of lifelong fans.\nSocial media analysis across TikTok, Instagram, Facebook, and Twitter reveals several trends. Player and Marketing-focused content consistently drives the highest engagement, particularly when posted on weekends and throughout in-season months. TikTok and Reels thrive on trend participation and player personality, while Facebook and Twitter see deeper fan interaction through video content and community-based content. Strategic timing, content format, and cross-platform recycling are a few important steps for growing reach and sustaining fan engagement.\nSurvey research conducted among Lawrence University students supports a strong interest in the return of College Night, particularly if events are hosted in May and early June. The main barriers - academic conflicts, transportation, and lack of peer presence - can be addressed through thoughtful planning, including school-provided shuttles, student ambassadors, and themed programming. Respondents expressed clear interest in affordable pricing, interactive games, free merch, and school-specific celebrations.\nVView Our Final Report!"
+  },
+  {
+    "objectID": "tr_project.html#timber-rattlers-practicum-work",
+    "href": "tr_project.html#timber-rattlers-practicum-work",
+    "title": "Conner Robertson",
+    "section": "",
+    "text": "Course: BUEN 396 Practicum in Business and Entrepreneurship\nClient: Wisconsin Timber Rattlers\nAffiliation: Milwaukee Brewers High-A Affiliate\nLocation: Appleton, Wisconsin\nProject Type: Marketing Research Paper\nFocus: Fan Engagement + College Student Focus  My Role: College Night Survey Team\nResearch Methods: Survey Data, Social Media Audit, Market Research"
+  },
+  {
+    "objectID": "bus_model.html",
+    "href": "bus_model.html",
+    "title": "Unlock Performance Institute (UPI)",
+    "section": "",
+    "text": "PDF Document"
+  },
+  {
+    "objectID": "bus_model.html#executive-summary",
+    "href": "bus_model.html#executive-summary",
+    "title": "Unlock Performance Institute (UPI)",
+    "section": "Executive Summary",
+    "text": "Executive Summary\n\nUnlock Performance Institute is a technology-driven baseball training company focused on advanced pitching development for high school and collegiate athletes.\nUPI was created to fill a gap in amateur baseball training, especially for athletes and Division III programs that often lack access to professional-level resources, structured programming, and advanced performance technology.\nThe business combines individualized training plans, pitching analytics, strength development, arm care, and remote coaching to help athletes improve performance while reducing injury risk."
+  },
+  {
+    "objectID": "bus_model.html#external-market-analysis",
+    "href": "bus_model.html#external-market-analysis",
+    "title": "Unlock Performance Institute (UPI)",
+    "section": "External Market Analysis",
+    "text": "External Market Analysis\n\nBI: Business Implications\n\nTo be successful, UPI must build genuine, long-term relationships with athletes, coaches, and parents.\nThe business depends on trust, measurable results, and a training environment that athletes believe will help them improve.\nUPI must also maintain consistent program quality, keep up with industry advancements, and retain athletes by regularly updating training systems and staying connected with its community.\n\nKLP: Key Leverage Point\n\nUPI can use seasonality as an advantage rather than a weakness.\nDuring the baseball season, many competitors experience lower training demand. UPI can use this time to improve programming, build relationships, run clinics, and prepare athletes for off-season development.\nBy staying active during slower periods, UPI can position itself as the preferred training option when athletes are ready to return to structured development.\n\nSCA: Sustainable Competitive Advantage\n\nUPI’s strongest competitive advantage is its detailed integration of advanced technology with individualized pitching development.\nBy using tools such as Trackman, Rapsodo, Driveline, and Arm Care, UPI can provide data-driven training that is more specific and measurable than traditional coaching.\nThis allows the company to personalize each athlete’s plan, track progress, improve performance, and reduce injury risk.\nUPI’s focus on pitchers, combined with its technology-based training model and ability to serve both individuals and teams, creates a unique position in the baseball development market."
+  },
+  {
+    "objectID": "bus_model.html#financial-analysis-plan",
+    "href": "bus_model.html#financial-analysis-plan",
+    "title": "Unlock Performance Institute (UPI)",
+    "section": "Financial Analysis & Plan",
+    "text": "Financial Analysis & Plan\n\nUPI’s financial plan focuses on securing enough startup funding to launch the facility, purchase necessary equipment, and create a strong foundation for long-term growth.\nThe business requires $275,000 in financing, which covers the most important startup needs:\n\n\n\nFacility rent for 2 years: $150,000\nEquipment costs: $106,199\nAdditional startup costs and buffer: about $18,801\n\n\n\nProjected revenue shows strong growth over the first three years:\n\n\n\nYear 1: $157,500\nYear 2: $337,625\nYear 3: $651,500\n\n\nThe first year is expected to involve heavy reinvestment and lower profitability because of startup costs. However, by years two and three, UPI expects stronger cash flow as the client base grows, services expand, and the business becomes more established.\nA few key financial indicators support the company’s long-term potential. UPI projects an average gross profit margin of 49%, an average return on assets of 21%, and an average return on equity of 38% over the first three years. These numbers suggest that, once the business moves past the startup phase, it has the potential to use its assets efficiently and generate strong returns.\nThe main financial priority is managing cash effectively. UPI expects strong liquidity, but the plan also recognizes that holding too much unused cash could be inefficient. As the business grows, extra cash should be reinvested into equipment, technology, facility improvements, marketing, or investor returns."
+  },
+  {
+    "objectID": "text_analysis.html",
+    "href": "text_analysis.html",
+    "title": "Text Analysis Project",
+    "section": "",
+    "text": "GitHub Repo\nNote: This was a joint project done with Will Zatkowski"
+  },
+  {
+    "objectID": "text_analysis.html#introduction-background",
+    "href": "text_analysis.html#introduction-background",
+    "title": "Text Analysis Project",
+    "section": "Introduction & Background",
+    "text": "Introduction & Background\nReligious texts have shaped history not only through what they say, but also through how they are written. The four Gospels in the Bible are often read together because they each tell the story of Jesus from four different perspectives. While they overlap in many places, they also differ in structure, emphasis, and wording. These differences make the Gospels a useful case for text analysis, where we can compare not just what each Gospel says, but how each one says it. In this blog post, we will use computational tools to explore whether the Gospels’ language patterns reflect their historical and literary relationships. To be more specific, our primary goal is to identify which words and themes are most distinctive from one Gospel to the next, and understand the linguistic differences tied to the unique writing styles of each author.\nFor a deeper dive into the historical background, check out our PDF document!"
   },
   {
     "objectID": "about.html",
@@ -12,27 +82,6 @@
     "title": "About Me",
     "section": "",
     "text": "Hello, I’m Conner Robertson — a student-athlete and aspiring business professional with interests in baseball, analytics, entrepreneurship, and technology.\nThis website highlights my background, projects, and experience. I am especially interested in combining data, performance, and strategy to solve real-world problems."
-  },
-  {
-    "objectID": "about.html#hello",
-    "href": "about.html#hello",
-    "title": "About",
-    "section": "Hello",
-    "text": "Hello\nI’m Conner Robertson, a student-athlete and aspiring business professional with interests in baseball, analytics, entrepreneurship, and technology.\nThis website highlights my background, projects, and experience. I am especially interested in combining data, performance, and strategy to solve real-world problems."
-  },
-  {
-    "objectID": "about.html#what-im-working-on",
-    "href": "about.html#what-im-working-on",
-    "title": "About",
-    "section": "What I’m Working On",
-    "text": "What I’m Working On\n\nBusiness and entrepreneurship projects\nBaseball performance and player development\nData visualization and coding in R\nProfessional portfolio development"
-  },
-  {
-    "objectID": "index.html#welcome",
-    "href": "index.html#welcome",
-    "title": "Conner Robertson",
-    "section": "",
-    "text": "I’m Conner Robertson, a student-athlete and aspiring business professional with interests in analytics, entrepreneurship, technology, and performance.\nThis site serves as a professional portfolio where I share my background, projects, and developing work in business, data, and strategy.\n\nMy focus is on combining data-driven thinking with leadership, communication, and real-world problem solving."
   },
   {
     "objectID": "about.html#interests",
@@ -49,15 +98,8 @@
     "text": "Beyond the classroom\nI value teamwork, discipline, and continuous improvement. My experiences in athletics and academics have shaped the way I approach leadership, preparation, and long-term growth."
   },
   {
-    "objectID": "index.html#featured-work",
-    "href": "index.html#featured-work",
-    "title": "Conner Robertson",
-    "section": "Featured Work",
-    "text": "Featured Work\nExplore selected projects in analytics, strategy, and business problem-solving."
-  },
-  {
-    "objectID": "index.html#home-name",
-    "href": "index.html#home-name",
+    "objectID": "index.html",
+    "href": "index.html",
     "title": "Conner Robertson",
     "section": "",
     "text": "Email GitHub LinkedIn"
@@ -70,55 +112,6 @@
     "text": "Resume\n View my Resume\n\n\nShiny App Project\nMajor League Baseball pitching percentile rankings analysis.\n Learn More\n\n\nMy Photography Portfolio\nA small collection of moments I have captured.\n View\n\n\nBackground\nLearn more about my interests and professional goals.\n About Me"
   },
   {
-    "objectID": "tr_project.html",
-    "href": "tr_project.html",
-    "title": "Conner Robertson",
-    "section": "",
-    "text": "Course: BUEN 396 Practicum in Business and Entrepreneurship\nClient: Wisconsin Timber Rattlers\nAffiliation: Milwaukee Brewers High-A Affiliate\nLocation: Appleton, Wisconsin\nProject Type: Marketing Research Paper\nFocus: Fan Engagement + College Student Focus  My Role: College Night Survey Team\nResearch Methods: Survey Data, Social Media Audit, Market Research\nExecutive Summary\nThis market research paper outlines comprehensive strategies aimed at increasing engagement, visibility, and overall fandom for the Wisconsin Timber Rattlers, focusing on sports marketing innovation, digital outreach, and new College Night initiatives. Drawing from extensive social media analytics, national sports marketing trends, and primary survey research, our goal is to modernize how the team connects with key demographics.\nBy aligning digital content with fan behavior, activating cause-based and community- driven sponsorships, and creating personalized experiences for Gen Z fans, the Timber Rattlers can position themselves as a modern minor league team that fosters loyalty, inclusivity, and excitement. These efforts offer more than short-term attendance boosts— they lay the groundwork for a new generation of lifelong fans.\nSocial media analysis across TikTok, Instagram, Facebook, and Twitter reveals several trends. Player and Marketing-focused content consistently drives the highest engagement, particularly when posted on weekends and throughout in-season months. TikTok and Reels thrive on trend participation and player personality, while Facebook and Twitter see deeper fan interaction through video content and community-based content. Strategic timing, content format, and cross-platform recycling are a few important steps for growing reach and sustaining fan engagement.\nSurvey research conducted among Lawrence University students supports a strong interest in the return of College Night, particularly if events are hosted in May and early June. The main barriers - academic conflicts, transportation, and lack of peer presence - can be addressed through thoughtful planning, including school-provided shuttles, student ambassadors, and themed programming. Respondents expressed clear interest in affordable pricing, interactive games, free merch, and school-specific celebrations.\nView Our Final Report! PDF Document"
-  },
-  {
-    "objectID": "tr_project.html#timber-rattlers-practicum-work",
-    "href": "tr_project.html#timber-rattlers-practicum-work",
-    "title": "Conner Robertson",
-    "section": "",
-    "text": "Course: BUEN 396 Practicum in Business and Entrepreneurship\nClient: Wisconsin Timber Rattlers\nAffiliation: Milwaukee Brewers High-A Affiliate\nLocation: Appleton, Wisconsin\nProject Type: Marketing Research Paper\nFocus: Fan Engagement + College Student Focus  My Role: College Night Survey Team\nResearch Methods: Survey Data, Social Media Audit, Market Research"
-  },
-  {
-    "objectID": "images/bus_model.html",
-    "href": "images/bus_model.html",
-    "title": "Conner Robertson",
-    "section": "",
-    "text": "Executive Summary\nUnlock Performance Institute is committed to revolutionizing baseball pitching development by creating innovative, technology-based training programs. Its unique methodology, founded on private instruction, leading-edge equipment, and customized programming, enables every athlete at each level to tap into their fullest potential. Passionately fueled with a vision of accessibility, inclusiveness, and excellence, Unlock Performance Institute will make a difference in amateur and collegiate baseball athletes for generations.\nFounded to provide top-notch and tailored training to pitchers, our business was established to fill a vital void in the market. Most Division III baseball programs and amateur players have zero access to organized programming and professional-level instruction. By providing customized programs in our Colorado facility and online for college programs across the country, Unlock Performance Institute equips athletes with the means to unlocktheir potential and perform at an unprecedented level.\nOur business operates on several primary values. Perseverance, inclusion, innovation, integrity, accessibility, and customization are at the top of our list of priorities in all that we undertake. These enable us to provide an open, efficient, and effective experience for each and every athlete that we assist.\nUnlock Performance Institute’s financial projections are for high growth. Our year one revenues are $145,084, increasing consistently to $437,046 in year two and $840,769 in year three. Our fixed-cost model is based on strategic investment in equipment, facilities, and professional coaching to support sustainable operations and deliver excellent value to our clients. We feel that we can grow successfully by careful cash flow management and by leveraging partnerships with sporting organizations.\nPDF Document"
-  },
-  {
-    "objectID": "images/bus_model.html#business-entrepreneurship-venture-project-model",
-    "href": "images/bus_model.html#business-entrepreneurship-venture-project-model",
-    "title": "Conner Robertson",
-    "section": "",
-    "text": "Executive Summary\nUnlock Performance Institute is committed to revolutionizing baseball pitching development by creating innovative, technology-based training programs. Its unique methodology, founded on private instruction, leading-edge equipment, and customized programming, enables every athlete at each level to tap into their fullest potential. Passionately fueled with a vision of accessibility, inclusiveness, and excellence, Unlock Performance Institute will make a difference in amateur and collegiate baseball athletes for generations.\nFounded to provide top-notch and tailored training to pitchers, our business was established to fill a vital void in the market. Most Division III baseball programs and amateur players have zero access to organized programming and professional-level instruction. By providing customized programs in our Colorado facility and online for college programs across the country, Unlock Performance Institute equips athletes with the means to unlocktheir potential and perform at an unprecedented level.\nOur business operates on several primary values. Perseverance, inclusion, innovation, integrity, accessibility, and customization are at the top of our list of priorities in all that we undertake. These enable us to provide an open, efficient, and effective experience for each and every athlete that we assist.\nUnlock Performance Institute’s financial projections are for high growth. Our year one revenues are $145,084, increasing consistently to $437,046 in year two and $840,769 in year three. Our fixed-cost model is based on strategic investment in equipment, facilities, and professional coaching to support sustainable operations and deliver excellent value to our clients. We feel that we can grow successfully by careful cash flow management and by leveraging partnerships with sporting organizations.\nPDF Document"
-  },
-  {
-    "objectID": "bus_model.html",
-    "href": "bus_model.html",
-    "title": "Unlock Performance Institute (UPI)",
-    "section": "",
-    "text": "PDF Document"
-  },
-  {
-    "objectID": "bus_model.html#business-entrepreneurship-business-model",
-    "href": "bus_model.html#business-entrepreneurship-business-model",
-    "title": "Conner Robertson",
-    "section": "",
-    "text": "Executive Summary\nUnlock Performance Institute is committed to revolutionizing baseball pitching development by creating innovative, technology-based training programs. Its unique methodology, founded on private instruction, leading-edge equipment, and customized programming, enables every athlete at each level to tap into their fullest potential. Passionately fueled with a vision of accessibility, inclusiveness, and excellence, Unlock Performance Institute will make a difference in amateur and collegiate baseball athletes for generations.\nFounded to provide top-notch and tailored training to pitchers, our business was established to fill a vital void in the market. Most Division III baseball programs and amateur players have zero access to organized programming and professional-level instruction. By providing customized programs in our Colorado facility and online for college programs across the country, Unlock Performance Institute equips athletes with the means to unlocktheir potential and perform at an unprecedented level.\nOur business operates on several primary values. Perseverance, inclusion, innovation, integrity, accessibility, and customization are at the top of our list of priorities in all that we undertake. These enable us to provide an open, efficient, and effective experience for each and every athlete that we assist.\nUnlock Performance Institute’s financial projections are for high growth. Our year one revenues are $145,084, increasing consistently to $437,046 in year two and $840,769 in year three. Our fixed-cost model is based on strategic investment in equipment, facilities, and professional coaching to support sustainable operations and deliver excellent value to our clients. We feel that we can grow successfully by careful cash flow management and by leveraging partnerships with sporting organizations.\nPDF Document"
-  },
-  {
-    "objectID": "images/bus_model.html#business-entrepreneurship-business-model",
-    "href": "images/bus_model.html#business-entrepreneurship-business-model",
-    "title": "Conner Robertson",
-    "section": "",
-    "text": "Executive Summary\nUnlock Performance Institute is committed to revolutionizing baseball pitching development by creating innovative, technology-based training programs. Its unique methodology, founded on private instruction, leading-edge equipment, and customized programming, enables every athlete at each level to tap into their fullest potential. Passionately fueled with a vision of accessibility, inclusiveness, and excellence, Unlock Performance Institute will make a difference in amateur and collegiate baseball athletes for generations.\nFounded to provide top-notch and tailored training to pitchers, our business was established to fill a vital void in the market. Most Division III baseball programs and amateur players have zero access to organized programming and professional-level instruction. By providing customized programs in our Colorado facility and online for college programs across the country, Unlock Performance Institute equips athletes with the means to unlocktheir potential and perform at an unprecedented level.\nOur business operates on several primary values. Perseverance, inclusion, innovation, integrity, accessibility, and customization are at the top of our list of priorities in all that we undertake. These enable us to provide an open, efficient, and effective experience for each and every athlete that we assist.\nUnlock Performance Institute’s financial projections are for high growth. Our year one revenues are $145,084, increasing consistently to $437,046 in year two and $840,769 in year three. Our fixed-cost model is based on strategic investment in equipment, facilities, and professional coaching to support sustainable operations and deliver excellent value to our clients. We feel that we can grow successfully by careful cash flow management and by leveraging partnerships with sporting organizations.\nPDF Document"
-  },
-  {
     "objectID": "photography.html",
     "href": "photography.html",
     "title": "\nMy Photography Portfolio\n",
@@ -126,80 +119,24 @@
     "text": "nature, friends, and memories"
   },
   {
-    "objectID": "bus_model.html#unlock-performance-institute",
-    "href": "bus_model.html#unlock-performance-institute",
-    "title": "Business & Entrepreneurship UPI Model",
-    "section": "",
-    "text": "Unlock Performance Institute is a technology-driven baseball training company focused on advanced pitching development for high school and collegiate athletes.\nUPI was created to fill a gap in amateur baseball training, especially for athletes and Division III programs that often lack access to professional-level resources, structured programming, and advanced performance technology.\nThe business combines individualized training plans, pitching analytics, strength development, arm care, and remote coaching to help athletes improve performance while reducing injury risk.\nUPI’s model is built around accessibility, innovation, and customization, giving athletes a more organized and measurable way to train.\nThe company plans to grow through in-person training in Colorado, remote programming for athletes nationwide, partnerships with high schools, and long-term consulting relationships with collegiate programs."
-  },
-  {
-    "objectID": "bus_model.html#business-goals-and-objectives",
-    "href": "bus_model.html#business-goals-and-objectives",
-    "title": "Unlock Performance Institute",
-    "section": "Business Goals and Objectives",
-    "text": "Business Goals and Objectives\n\nPhase 1: Build Initial Recognition\n\nBegin by developing strong relationships with local high schools, coaches, parents, and athletes.\nHost clinics, provide assessments, and offer direct training to establish trust and build brand awareness.\nThe goal is to secure connections with several local high schools and create an early base of recurring clients.\n\nPhase 2: Establish the Facility\n\nSecure funding and rent an indoor training facility large enough for pitching lanes, strength training, recovery work, and athlete development.\nThe facility will serve as the foundation for UPI’s in-person training model and create a professional environment for athletes to train consistently.\n\nPhase 3: Build a Reliable Customer Base\n\nGrow the in-facility athlete base by providing consistent programming, measurable results, and strong communication.\nUPI aims to create long-term athlete retention by helping players clearly understand their progress and development.\n\nPhase 4: Expand Through Remote Training\n\nUse remote programming to reach athletes outside Colorado.\nAthletes will receive assessments, video analysis, individualized plans, and ongoing communication through digital platforms.\nThis allows UPI to scale beyond the limits of a physical facility.\n\nPhase 5: Partner with Collegiate Programs\n\nExpand into team-wide programming for Division III baseball programs.\nUPI will provide structured pitching development, workload management, and performance support for schools that may not have the budget for specialized pitching staff."
-  },
-  {
-    "objectID": "bus_model.html#external-market-analysis",
-    "href": "bus_model.html#external-market-analysis",
-    "title": "Unlock Performance Institute (UPI)",
-    "section": "External Market Analysis",
-    "text": "External Market Analysis\n\nBI: Business Implications\n\nTo be successful, UPI must build genuine, long-term relationships with athletes, coaches, and parents.\nThe business depends on trust, measurable results, and a training environment that athletes believe will help them improve.\nUPI must also maintain consistent program quality, keep up with industry advancements, and retain athletes by regularly updating training systems and staying connected with its community.\n\nKLP: Key Leverage Point\n\nUPI can use seasonality as an advantage rather than a weakness.\nDuring the baseball season, many competitors experience lower training demand. UPI can use this time to improve programming, build relationships, run clinics, and prepare athletes for off-season development.\nBy staying active during slower periods, UPI can position itself as the preferred training option when athletes are ready to return to structured development.\n\nSCA: Sustainable Competitive Advantage\n\nUPI’s strongest competitive advantage is its detailed integration of advanced technology with individualized pitching development.\nBy using tools such as Trackman, Rapsodo, Driveline, and Arm Care, UPI can provide data-driven training that is more specific and measurable than traditional coaching.\nThis allows the company to personalize each athlete’s plan, track progress, improve performance, and reduce injury risk.\nUPI’s focus on pitchers, combined with its technology-based training model and ability to serve both individuals and teams, creates a unique position in the baseball development market."
-  },
-  {
-    "objectID": "bus_model.html#executive-summary",
-    "href": "bus_model.html#executive-summary",
-    "title": "Unlock Performance Institute (UPI)",
-    "section": "Executive Summary",
-    "text": "Executive Summary\n\nUnlock Performance Institute is a technology-driven baseball training company focused on advanced pitching development for high school and collegiate athletes.\nUPI was created to fill a gap in amateur baseball training, especially for athletes and Division III programs that often lack access to professional-level resources, structured programming, and advanced performance technology.\nThe business combines individualized training plans, pitching analytics, strength development, arm care, and remote coaching to help athletes improve performance while reducing injury risk."
-  },
-  {
-    "objectID": "bus_model.html#financial-analysis-plan",
-    "href": "bus_model.html#financial-analysis-plan",
-    "title": "Unlock Performance Institute (UPI)",
-    "section": "Financial Analysis & Plan",
-    "text": "Financial Analysis & Plan\n\nUPI’s financial plan focuses on securing enough startup funding to launch the facility, purchase necessary equipment, and create a strong foundation for long-term growth.\nThe business requires $275,000 in financing, which covers the most important startup needs:\n\n\n\nFacility rent for 2 years: $150,000\nEquipment costs: $106,199\nAdditional startup costs and buffer: about $18,801\n\n\n\nProjected revenue shows strong growth over the first three years:\n\n\n\nYear 1: $157,500\nYear 2: $337,625\nYear 3: $651,500\n\n\nThe first year is expected to involve heavy reinvestment and lower profitability because of startup costs. However, by years two and three, UPI expects stronger cash flow as the client base grows, services expand, and the business becomes more established.\nA few key financial indicators support the company’s long-term potential. UPI projects an average gross profit margin of 49%, an average return on assets of 21%, and an average return on equity of 38% over the first three years. These numbers suggest that, once the business moves past the startup phase, it has the potential to use its assets efficiently and generate strong returns.\nThe main financial priority is managing cash effectively. UPI expects strong liquidity, but the plan also recognizes that holding too much unused cash could be inefficient. As the business grows, extra cash should be reinvested into equipment, technology, facility improvements, marketing, or investor returns."
-  },
-  {
-    "objectID": "sql_project.html",
-    "href": "sql_project.html",
-    "title": "SQL Project",
-    "section": "",
-    "text": "GitHub Repo"
-  },
-  {
-    "objectID": "sql_project.html#data",
-    "href": "sql_project.html#data",
-    "title": "SQL Project",
+    "objectID": "text_analysis.html#data",
+    "href": "text_analysis.html#data",
+    "title": "Text Analysis Project",
     "section": "Data",
-    "text": "Data\nFor this SQL project, we built a small MLB team-statistics database using three datasets pulled from FanGraphs: team batting, team pitching, and team fielding. Using the baseballr package in R, we created a vector of seasons and looped through each year to collect team-level statistics from 2015 through 2024, excluding the shortened 2020 season. Each dataset was cleaned by removing unnecessary columns, renaming variables, and saving the final versions as CSV files before loading them into a DuckDB database. This gave us three connected tables that could be queried with SQL to compare offensive production, pitching performance, and defensive value across MLB teams and seasons.\nyears &lt;- c(2024, 2023, 2022, 2021, 2019, 2018, 2017, 2016, 2015)\n\n- example of looping for the team_pitching data\nteam_pitching_all_unfiltered &lt;- map_dfr(\n  years,\n  ~ fg_team_pitcher(startseason = .x, endseason = .x))\n\nCreating Database\n\nCreating a Database called team_stats_db, with the connection between called con_bts\n\n# creating database - CR\n\ncon_bts &lt;- DBI::dbConnect(duckdb::duckdb(), dbdir = \"team_stats_db\")\n\nBelow is the designing for the team_pitching table (one of three tables being added to the database), which will then be connected to the written csv holding the real data.\n\n-- Re-create with flexible NULL constraints\nCREATE TABLE team_pitching (\n    Season SMALLINT NOT NULL,\n    team_name VARCHAR(50) NOT NULL,\n    W SMALLINT NOT NULL,\n    L SMALLINT NOT NULL,\n    ERA DOUBLE,           \n    G SMALLINT NOT NULL,\n    QS SMALLINT,          \n    CG SMALLINT,          \n    SV SMALLINT,      \n    BS SMALLINT,    \n    H SMALLINT NOT NULL,\n    R SMALLINT NOT NULL,\n    ER SMALLINT NOT NULL,\n    HR SMALLINT NOT NULL,\n    BB SMALLINT NOT NULL,\n    HBP SMALLINT,         \n    BK SMALLINT,          \n    SO SMALLINT NOT NULL,\n    Balls INTEGER,  \n    Strikes INTEGER,      \n    FIP DOUBLE,           \n    LD_pct DOUBLE,       \n    GB_pct DOUBLE,    \n    HR_FB DOUBLE,       \n    FBall_pct DOUBLE,   \n    SL_pct DOUBLE,    \n    CT_pct DOUBLE,     \n    CB_pct DOUBLE,    \n    CH_pct DOUBLE,        \n    K_pct DOUBLE,      \n    Zone_pct DOUBLE,      \n    BB_pct DOUBLE,      \n    \"K-BB_pct\" DOUBLE, \n\n    PRIMARY KEY (Season, team_name));"
+    "text": "Data\nThe data used in this project contains the King James version of the four Gospels: Matthew, Mark, Luke, and John, from Gutenberg metadata. Each observation represents a portion of Gospel text, organized by Gospel and verse-level information. The raw version of our initial dataset includes the Gutenberg-assigned ID for each gospel, the free-form text, the title, and the Gospel name.\n\nUncleaned DataCleaning ProcessCleaned Data\n\n\n\n\n\nFirst few rows of the uncleaned Gospel text data\n\n\n\n\n\n\n\n\ngutenberg_id\ntext\ntitle\ngospel\n\n\n\n\n8040\nBook 40 Matthew\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\n\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\n40:001:001 The book of the generation of Jesus Christ, the son of David,\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\nthe son of Abraham.\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\n\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\n40:001:002 Abraham begat Isaac; and Isaac begat Jacob; and Jacob begat\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n\n\n\n\n\n\ngospels_clean &lt;- gospels_raw |&gt;\n  filter(text != \"\") |&gt;   # removing any rows where the text is now blank.\n\n  # removing lines that begin with \"book\" followed by a space.\n  # str_detect() checks whether a text pattern is present.\n  filter(!str_detect(text, regex(\"^book\\\\s+\", ignore_case = TRUE))) |&gt;\n  mutate(\n    # str_replace_all() replaces every match of a pattern.\n    # \\\\d+ - \"one or more digits.\"\n    # this removes chapter numbers, verse numbers, or labels\n    text = str_replace_all(text, \"\\\\d+\", \" \"),\n    \n    # removing leftover colons from the beginning of the line\n    # \\\\s* - \"zero or more spaces\"\n    # : - \"match a colon\"\n    # :? - \"optionally matches one more colon\"\n    # the \"\" at the end deletes the matched punctuation\n    text = str_replace(text, \"^\\\\s*:\\\\s*:?\\\\s*\", \"\"), \n    \n    text = str_squish(text) # str_squish() removes extra spaces from each line of text.\n  )\n\n\n\n\n\n\nFirst few rows of the cleaned Gospel text data\n\n\n\n\n\n\n\n\ngutenberg_id\ntext\ntitle\ngospel\n\n\n\n\n8040\nThe book of the generation of Jesus Christ, the son of David,\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\nthe son of Abraham.\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\nAbraham begat Isaac; and Isaac begat Jacob; and Jacob begat\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\nJudas and his brethren;\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\nAnd Judas begat Phares and Zara of Thamar; and Phares begat\nThe Bible, King James version, Book 40: Matthew\nMatthew\n\n\n8040\nEsrom; and Esrom begat Aram;\nThe Bible, King James version, Book 40: Matthew\nMatthew"
   },
   {
-    "objectID": "sql_project.html#primary-query",
-    "href": "sql_project.html#primary-query",
-    "title": "SQL Project",
-    "section": "Primary Query",
-    "text": "Primary Query\nThe main goal was to see whether teams with stronger defensive performance also tended to have lower ERAs. To do this, we worked with team-level pitching and fielding data, joining the tables so that each row represented one team with its ERA, OAA, and DRS values. ERA was used as the main measure of run prevention, while OAA and DRS were used to evaluate defensive quality. After combining the data, we created defensive tiers to group teams into Excellent, Mediocre, and Poor Defense, which allowed us to compare overall defensive performance against team ERA in a clearer way.\n\nFirst joining the team_pitching and team_fielding data frames \nKeeping only rows in 2024 season and removing NA’s\n\nWITH joined_data AS (\n    SELECT\n        p.Season,       \n        p.team_name,    \n        p.ERA,          \n        f.OAA,          -- Outs Above Average\n        f.DRS           -- Defensive Runs Saved\n    FROM team_pitching AS p\n    JOIN team_fielding AS f\n        ON p.Season = f.Season\n       AND p.team_name = f.team_name\n    WHERE p.Season = 2024\n    AND f.OAA IS NOT NULL),\n\nNow I am classifying each team into a defensive tier using OAA and DRS.\n\nOAA - A statcast defensive metric measuring how many outs a fielder saves, incorporating range and play difficulty\nDRS - A statistic that measures how many runs a player saves or costs their team compared to an average fielder\n\nThe CASE statement works like an if/else structure: teams with strong values in both metrics are labeled Excellent Defense, teams with weak values in both are labeled Poor Defense, and all others are labeled Mediocre Defense.\nThe new defense_tier variable is then used to color the ERA plot and compare defensive performance with run prevention.\n\nSELECT\n        Season,\n        team_name,\n        ERA,\n        OAA,\n        DRS,\n        CASE\n        \n            WHEN\n                (CASE WHEN OAA &gt;= 25 THEN 1 ELSE 0 END) +\n                (CASE WHEN DRS &gt;= 5 THEN 1 ELSE 0 END) = 2\n            THEN 'Excellent Defense'\n\n            WHEN\n                (CASE WHEN OAA &lt;= 0 THEN 1 ELSE 0 END) +\n                (CASE WHEN DRS &lt;= 0 THEN 1 ELSE 0 END) = 2\n            THEN 'Poor Defense'\n\n            ELSE 'Mediocre Defense'\n\n        END AS defense_tier\n\n    FROM joined_data)\n\nVisualization\nThe plot below orders teams by ERA, with better run prevention on the left and worse run prevention on the right. Each team is colored by a defensive tier created from its 2024 OAA and DRS values. Overall, the visualization suggests that defense may relate to ERA, since poor defensive teams generally appear more often in the mid-to-high ERA range. However, the colors are still mixed across the plot, and even strong or mediocre defensive teams cover a wide range of ERAs. This shows that defense matters, but ERA is also shaped by other factors like pitching talent, strikeouts, walks, and home runs allowed."
-  },
-  {
-    "objectID": "sql_project.html#visualization",
-    "href": "sql_project.html#visualization",
-    "title": "SQL Project",
-    "section": "Visualization",
-    "text": "Visualization\nThe plot below orders teams by ERA, with better run prevention on the left and worse run prevention on the right. Each team is colored by a defensive tier created from its 2024 OAA and DRS values. Overall, the visualization suggests that defense may relate to ERA, since poor defensive teams generally appear more often in the mid-to-high ERA range. However, the colors are still mixed across the plot, and even strong or mediocre defensive teams cover a wide range of ERAs. This shows that defense matters, but ERA is also shaped by other factors like pitching talent, strikeouts, walks, and home runs allowed."
-  },
-  {
-    "objectID": "text_analysis.html",
-    "href": "text_analysis.html",
+    "objectID": "text_analysis.html#exploring-distinctive-thematic-language-between-the-four-gospels",
+    "href": "text_analysis.html#exploring-distinctive-thematic-language-between-the-four-gospels",
     "title": "Text Analysis Project",
-    "section": "",
-    "text": "GitHub Repo"
+    "section": "Exploring Distinctive Thematic Language between the four Gospels",
+    "text": "Exploring Distinctive Thematic Language between the four Gospels"
   },
   {
-    "objectID": "text_analysis.html#introduction-background",
-    "href": "text_analysis.html#introduction-background",
+    "objectID": "text_analysis.html#exploring-distinctive-thematic-language-in-the-four-gospels",
+    "href": "text_analysis.html#exploring-distinctive-thematic-language-in-the-four-gospels",
     "title": "Text Analysis Project",
-    "section": "Introduction & Background",
-    "text": "Introduction & Background\nReligious texts have shaped history not only through what they say, but also through how they are written. The four Gospels in the Bible are often read together because they each tell the story of Jesus from four different perspectives. While they overlap in many places, they also differ in structure, emphasis, and wording. These differences make the Gospels a useful case for text analysis, where we can compare not just what each Gospel says, but how each one says it. In this blog post, we will use computational tools to explore whether the Gospels’ language patterns reflect their historical and literary relationships. To be more specific, our primary goal is to identify which words and themes are most distinctive from one Gospel to the next, and understand the linguistic differences tied to the unique writing styles of each author.\nFor some brief context, historians generally agree that Mark was the first gospel to be written, around 70 A.D. Matthew and Luke were written between 80-85 A.D, and are generally believed to have used Mark as a source. These three are known as the synoptic gospels, a term derived from the idea of being “seen together. There are many similarities between these three writings, as they share many of the same stories, structures and, as we see, even wording patterns. Our cluster analysis attempts to quantitatively demonstrate this well-understood belief.\nApart from these three, there is John. His gospel is believed to have been written last, around 90 A.D. There are many differences between John and the synoptic gospels, for instance, there are several stories told in John that do not appear in the other three, and parts of the chronology are different.\n\nData\nThe data used in this project contains the King James version of the four Gospels: Matthew, Mark, Luke, and John, from Gutenberg metadata. Each observation represents a portion of Gospel text, organized by Gospel and verse-level information. The raw version of our initial dataset includes the Gutenberg-assigned ID for each gospel, the free-form text, the title, and the Gospel name."
+    "section": "Exploring Distinctive Thematic Language in the four Gospels",
+    "text": "Exploring Distinctive Thematic Language in the four Gospels\nWe first wanted to compare the Gospels through the specific types of language they emphasize. To do so, we split core words and phrases throughout the bible into 6 themes for later sentiment analysis: forgiveness, love, faith, miracles, evil, and death. Focusing on a smaller subset of words forces the analysis to center more directly on the theological and emotional language that shapes each Gospel. However, using sentiment analysis with religious phrases and wording can become quite buggy. Therefore, we had to manually create a ‘lexicon’ that not only categorized the custom set of words into these themes, but also gave a connotation score from -2 to 2: negative values represent darker or conflict-oriented language and positive values represent redemptive or hopeful language.\nSince TF-IDF only shows which words are most distinctive in each Gospel, we combined it with our connotation scores to make the measure more interpretive. In other words, a weighted connotation score was created by multiplying each word’s TF-IDF value by its manually assigned connotation score.\n\n\n\nSample of focus words after converting TF-IDF output into tidy format\n\n\n\n\n\n\n\n\n\n\nGospel\nWord\nTheme\nConnotation\nTF-IDF\nWeighted contribution\n\n\n\n\nJohn\nmiracles\nmiracles\n2\n0.0067\n0.0134\n\n\nJohn\nbelieveth\nfaith\n2\n0.0063\n0.0126\n\n\nJohn\nsin\nevil\n-2\n0.0059\n-0.0119\n\n\nLuke\ndevils\nevil\n-2\n0.0038\n-0.0076\n\n\nMark\ndevils\nevil\n-2\n0.0036\n-0.0073\n\n\nJohn\nloved\nlove\n2\n0.0034\n0.0068\n\n\nLuke\nsinner\nevil\n-2\n0.0032\n-0.0065\n\n\nMark\nunclean\nevil\n-2\n0.0030\n-0.0061\n\n\nLuke\nfaith\nfaith\n2\n0.0027\n0.0054\n\n\nMatthew\ndevils\nevil\n-2\n0.0025\n-0.0051\n\n\n\n\n\nNow we visualized these scores using a heatmap, with the x-axis comparing Matthew, Mark, Luke, and John, and the y-axis listing the six themes. Each tile represents one Gospel-theme combination, with the color and number showing whether that theme is more positively or negatively weighted in that Gospel. Strong positive values indicate that a theme is being shaped by words that are both distinctive to that Gospel and positively coded. Strong negative values indicate that a theme is being shaped by words that are both distinctive to that Gospel and negatively coded. These values are the normalized theme scores multiplied by 1000, which was done only to make the very small TF-IDF-based values easier to read on the plot.\n\n\n\n\n\n\n\n\n\n\nLuke, Mark, and Matthew all demonstrate strong similarities in the forgiveness, miracles, and faith themes. Forgiveness appears to be heavily significant across these three Gospels, with Luke having the highest weighted connotation score at 2.3, followed by Mark at 1.8 and Matthew at 1.7. In contrast, the textual data in John results in a value of 0…\nCheck out our pdf for a deeper analyis."
   }
 ]

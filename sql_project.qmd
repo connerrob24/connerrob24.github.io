@@ -5,13 +5,16 @@ toc: true
 format: html
 ---
 
+NOTE: This was a joint project worked on with Brett Hartlaub
+
 <i class="bi bi-github"></i> <a
 href="https://github.com/ADC-405-S26/Project_2_SQL_Team_11" target="_blank">GitHub Repo</a>
 
 ## Data
+
 For this SQL project, we built a small MLB team-statistics database using three datasets pulled from FanGraphs: team batting, team pitching, and team fielding. Using the `baseballr` package in R, we created a vector of seasons and looped through each year to collect team-level statistics from 2015 through 2024, excluding the shortened 2020 season. Each dataset was cleaned by removing unnecessary columns, renaming variables, and saving the final versions as CSV files before loading them into a DuckDB database. This gave us three connected tables that could be queried with SQL to compare offensive production, pitching performance, and defensive value across MLB teams and seasons.
 
-```sql
+``` sql
 years <- c(2024, 2023, 2022, 2021, 2019, 2018, 2017, 2016, 2015)
 
 - example of looping for the team_pitching data
@@ -20,19 +23,70 @@ team_pitching_all_unfiltered <- map_dfr(
   ~ fg_team_pitcher(startseason = .x, endseason = .x))
 ```
 
-### Creating Database
-
-- Creating a Database called team_stats_db, with the connection between called con_bts
+### Data Cleaning
 
 ```r
-# creating database - CR
+# removing unwanted variables 
+# (cleaning and renaming variables for database design purposes later)
 
-con_bts <- DBI::dbConnect(duckdb::duckdb(), dbdir = "team_stats_db")
+team_batting_all <- team_batting_all_unfiltered |>  select(-c(3:7, 19:21, 23, 27:38, 41, 43:51, 55:63, 66:131, 133:135, 137:141, 143:145, 152:278, 280:288, 292:374, 380:440)) |> 
+  rename(
+    singles = `1B`,
+    doubles = `2B`,
+    triples = `3B`,
+    avg_stat = AVG,
+    avg_plus = `AVG+`,
+    slg_plus = `SLG+`,
+    hrfb_pct_plus = `HRFB_pct+`,
+    soft_pct_plus = `Soft_pct+`,
+    med_pct_plus = `Med_pct+`,
+    hard_pct_plus = `Hard_pct+`)
+```
+
+```{r}
+#| include: false
+
+library(baseballr)
+library(purrr)
+library(dplyr)
+
+years <- c(2024, 2023, 2022, 2021, 2019, 2018, 2017, 2016, 2015)
+
+team_batting_all_unfiltered <- map_dfr(
+  years,
+  ~ fg_team_batter(startseason = .x, endseason = .x))
+
+
+team_batting_all <- team_batting_all_unfiltered |>  select(-c(3:7, 19:21, 23, 27:38, 41, 43:51, 55:63, 66:131, 133:135, 137:141, 143:145, 152:278, 280:288, 292:374, 380:440)) |> 
+  rename(
+    singles = `1B`,
+    doubles = `2B`,
+    triples = `3B`,
+    avg_stat = AVG,
+    avg_plus = `AVG+`,
+    slg_plus = `SLG+`,
+    hrfb_pct_plus = `HRFB_pct+`,
+    soft_pct_plus = `Soft_pct+`,
+    med_pct_plus = `Med_pct+`,
+    hard_pct_plus = `Hard_pct+`)
 
 ```
-- Below is the designing for the team_pitching table (one of three tables being added to the database), which will then be connected to the written csv holding the real data. 
 
-```r
+::: {style="text-align: center;"}
+**Sample Table**
+:::
+
+```{r}
+#| echo: false
+
+knitr::kable(head(team_batting_all))
+```
+
+### Database Designing
+
+-   Below is the designing for the team_pitching table (one of three tables being added to the database), which will then be connected to the written csv holding the real data.
+
+``` r
 -- Re-create with flexible NULL constraints
 CREATE TABLE team_pitching (
     Season SMALLINT NOT NULL,
@@ -73,13 +127,13 @@ CREATE TABLE team_pitching (
 ```
 
 ## Primary Query
+
 The main goal was to see whether teams with stronger defensive performance also tended to have lower ERAs. To do this, we worked with team-level pitching and fielding data, joining the tables so that each row represented one team with its ERA, OAA, and DRS values. ERA was used as the main measure of run prevention, while OAA and DRS were used to evaluate defensive quality. After combining the data, we created defensive tiers to group teams into Excellent, Mediocre, and Poor Defense, which allowed us to compare overall defensive performance against team ERA in a clearer way.
 
+-   First joining the team_pitching and team_fielding data frames <br>
+-   Keeping only rows in 2024 season and removing NA's
 
-- First joining the team_pitching and team_fielding data frames <br>
-- Keeping only rows in 2024 season and removing NA's
-
-```sql
+``` sql
 WITH joined_data AS (
     SELECT
         p.Season,       
@@ -95,17 +149,16 @@ WITH joined_data AS (
     AND f.OAA IS NOT NULL),
 ```
 
-- Now I am classifying each team into a defensive tier using `OAA` and `DRS`.
+-   Now I am classifying each team into a defensive tier using `OAA` and `DRS`.
 
-  - `OAA` - A statcast defensive metric measuring how many outs a fielder saves, incorporating range and play difficulty
-  - `DRS` - A statistic that measures how many runs a player saves or costs their team compared to an average fielder
+    -   `OAA` - A statcast defensive metric measuring how many outs a fielder saves, incorporating range and play difficulty
+    -   `DRS` - A statistic that measures how many runs a player saves or costs their team compared to an average fielder
 
-- The `CASE` statement works like an if/else structure: teams with strong values in both metrics are labeled **Excellent Defense**, teams with weak values in both are labeled **Poor Defense**, and all others are labeled **Mediocre Defense**.
+-   The `CASE` statement works like an if/else structure: teams with strong values in both metrics are labeled **Excellent Defense**, teams with weak values in both are labeled **Poor Defense**, and all others are labeled **Mediocre Defense**.
 
-- The new `defense_tier` variable is then used to color the ERA plot and compare defensive performance with run prevention.
+-   The new `defense_tier` variable is then used to color the ERA plot and compare defensive performance with run prevention.
 
-
-```r
+``` r
 SELECT
         Season,
         team_name,
@@ -130,9 +183,9 @@ SELECT
 
     FROM joined_data)
 ```
+
 ### Visualization
 
 The plot below orders teams by ERA, with better run prevention on the left and worse run prevention on the right. Each team is colored by a defensive tier created from its 2024 OAA and DRS values. Overall, the visualization suggests that defense may relate to ERA, since poor defensive teams generally appear more often in the mid-to-high ERA range. However, the colors are still mixed across the plot, and even strong or mediocre defensive teams cover a wide range of ERAs. This shows that defense matters, but ERA is also shaped by other factors like pitching talent, strikeouts, walks, and home runs allowed.
 
-
-![](images/Screenshot 2026-04-30){.tr-project-card}
+![](images/Screenshot%202026-04-30){.tr-project-card}

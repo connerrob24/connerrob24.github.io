@@ -58,7 +58,10 @@ can be addressed through thoughtful planning, including school-provided shuttles
 student ambassadors, and themed programming. Respondents expressed clear interest in
 affordable pricing, interactive games, free merch, and school-specific celebrations.
 
-View Our Final Report! [PDF Document](https://drive.google.com/file/d/1c04c7N2KtxSGbbG6O84baMcKsqir85wL/view?usp=sharing)
+VView Our Final Report! 
+<a href="https://drive.google.com/file/d/1c04c7N2KtxSGbbG6O84baMcKsqir85wL/view?usp=sharing" target="_blank">
+  <i class="bi bi-file-earmark-pdf-fill"></i>
+</a>
 
 
 
