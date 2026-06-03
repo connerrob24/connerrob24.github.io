@@ -160,6 +160,15 @@ div.quarto-about-trestles .about-entity .about-link:hover {
   color: white !important;
 }
 
+/* Make cards in grids the same height */
+.grid {
+  align-items: stretch;
+}
+
+.grid .card {
+  height: 100%;
+}
+
 /* Hero section */
 .hero-section {
   margin-top: 2rem;
@@ -245,6 +254,35 @@ div.quarto-about-trestles .about-entity .about-link:hover {
   color: white !important;
   text-decoration: none;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.card {
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  background-color: white;
+  margin-bottom: 1rem;
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 1.8rem;
+  color: #1f4e79;
+  margin-bottom: 0.5rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.page-logo {
+  max-width: 220px;
+  display: block;
+  margin-bottom: 1.5rem;
 }
 
 /* Featured work box */

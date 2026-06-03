@@ -161,6 +161,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./text_analysis.html">
  <span class="dropdown-text">Text Analysis</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./package.html">
+ <span class="dropdown-text">Webgem Package</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -182,11 +186,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a>
   <ul class="collapse">
   <li><a href="#data-cleaning" id="toc-data-cleaning" class="nav-link" data-scroll-target="#data-cleaning">Data Cleaning</a></li>
-  <li><a href="#database-designing" id="toc-database-designing" class="nav-link" data-scroll-target="#database-designing">Database Designing</a></li>
   </ul></li>
   <li><a href="#primary-query" id="toc-primary-query" class="nav-link" data-scroll-target="#primary-query">Primary Query</a>
   <ul class="collapse">
-  <li><a href="#visualization" id="toc-visualization" class="nav-link" data-scroll-target="#visualization">Visualization</a></li>
+  <li><a href="#qvisualization" id="toc-qvisualization" class="nav-link" data-scroll-target="#qvisualization">qVisualization</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -213,8 +216,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>NOTE: This was a joint project worked on with Brett Hartlaub</p>
 <p><i class="bi bi-github"></i> <a href="https://github.com/ADC-405-S26/Project_2_SQL_Team_11" target="_blank">GitHub Repo</a></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>NOTE:
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This was a joint project worked on with Brett Hartlaub</p>
+</div>
+</div>
 <section id="data" class="level2">
 <h2 class="anchored" data-anchor-id="data">Data</h2>
 <p>For this SQL project, we built a small MLB team-statistics database using three datasets pulled from FanGraphs: team batting, team pitching, and team fielding. Using the <code>baseballr</code> package in R, we created a vector of seasons and looped through each year to collect team-level statistics from 2015 through 2024, excluding the shortened 2020 season. Each dataset was cleaned by removing unnecessary columns, renaming variables, and saving the final versions as CSV files before loading them into a DuckDB database. This gave us three connected tables that could be queried with SQL to compare offensive production, pitching performance, and defensive value across MLB teams and seasons.</p>
@@ -224,6 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>team_pitching_all_unfiltered <span class="op">&lt;-</span> map_dfr(</span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  years,</span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  ~ fg_team_pitcher(startseason <span class="op">=</span> .x, endseason <span class="op">=</span> .x))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
 <section id="data-cleaning" class="level3">
 <h3 class="anchored" data-anchor-id="data-cleaning">Data Cleaning</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># removing unwanted variables </span></span>
@@ -241,422 +257,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">soft_pct_plus =</span> <span class="st">`</span><span class="at">Soft_pct+</span><span class="st">`</span>,</span>
 <span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">med_pct_plus =</span> <span class="st">`</span><span class="at">Med_pct+</span><span class="st">`</span>,</span>
 <span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">hard_pct_plus =</span> <span class="st">`</span><span class="at">Hard_pct+</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(baseballr)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>years <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2024</span>, <span class="dv">2023</span>, <span class="dv">2022</span>, <span class="dv">2021</span>, <span class="dv">2019</span>, <span class="dv">2018</span>, <span class="dv">2017</span>, <span class="dv">2016</span>, <span class="dv">2015</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>team_batting_all_unfiltered <span class="ot">&lt;-</span> <span class="fu">map_dfr</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  years,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span> <span class="fu">fg_team_batter</span>(<span class="at">startseason =</span> .x, <span class="at">endseason =</span> .x))</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>team_batting_all <span class="ot">&lt;-</span> team_batting_all_unfiltered <span class="sc">|&gt;</span>  <span class="fu">select</span>(<span class="sc">-</span><span class="fu">c</span>(<span class="dv">3</span><span class="sc">:</span><span class="dv">7</span>, <span class="dv">19</span><span class="sc">:</span><span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">27</span><span class="sc">:</span><span class="dv">38</span>, <span class="dv">41</span>, <span class="dv">43</span><span class="sc">:</span><span class="dv">51</span>, <span class="dv">55</span><span class="sc">:</span><span class="dv">63</span>, <span class="dv">66</span><span class="sc">:</span><span class="dv">131</span>, <span class="dv">133</span><span class="sc">:</span><span class="dv">135</span>, <span class="dv">137</span><span class="sc">:</span><span class="dv">141</span>, <span class="dv">143</span><span class="sc">:</span><span class="dv">145</span>, <span class="dv">152</span><span class="sc">:</span><span class="dv">278</span>, <span class="dv">280</span><span class="sc">:</span><span class="dv">288</span>, <span class="dv">292</span><span class="sc">:</span><span class="dv">374</span>, <span class="dv">380</span><span class="sc">:</span><span class="dv">440</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">singles =</span> <span class="st">`</span><span class="at">1B</span><span class="st">`</span>,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">doubles =</span> <span class="st">`</span><span class="at">2B</span><span class="st">`</span>,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">triples =</span> <span class="st">`</span><span class="at">3B</span><span class="st">`</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_stat =</span> AVG,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_plus =</span> <span class="st">`</span><span class="at">AVG+</span><span class="st">`</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="at">slg_plus =</span> <span class="st">`</span><span class="at">SLG+</span><span class="st">`</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">hrfb_pct_plus =</span> <span class="st">`</span><span class="at">HRFB_pct+</span><span class="st">`</span>,</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">soft_pct_plus =</span> <span class="st">`</span><span class="at">Soft_pct+</span><span class="st">`</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">med_pct_plus =</span> <span class="st">`</span><span class="at">Med_pct+</span><span class="st">`</span>,</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">hard_pct_plus =</span> <span class="st">`</span><span class="at">Hard_pct+</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div style="text-align: center;">
 <p><strong>Sample Table</strong></p>
 </div>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<colgroup>
-<col style="width: 1%">
-<col style="width: 2%">
-<col style="width: 1%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 2%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 1%">
-<col style="width: 3%">
-<col style="width: 3%">
-<col style="width: 4%">
-<col style="width: 5%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 2%">
-<col style="width: 3%">
-<col style="width: 1%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">Season</th>
-<th style="text-align: left;">team_name</th>
-<th style="text-align: right;">H</th>
-<th style="text-align: right;">singles</th>
-<th style="text-align: right;">doubles</th>
-<th style="text-align: right;">triples</th>
-<th style="text-align: right;">HR</th>
-<th style="text-align: right;">R</th>
-<th style="text-align: right;">RBI</th>
-<th style="text-align: right;">BB</th>
-<th style="text-align: right;">IBB</th>
-<th style="text-align: right;">SO</th>
-<th style="text-align: right;">HBP</th>
-<th style="text-align: right;">SB</th>
-<th style="text-align: right;">avg_stat</th>
-<th style="text-align: right;">GB</th>
-<th style="text-align: right;">FB</th>
-<th style="text-align: right;">SLG</th>
-<th style="text-align: right;">OPS</th>
-<th style="text-align: right;">BABIP</th>
-<th style="text-align: right;">wOBA</th>
-<th style="text-align: right;">wRAA</th>
-<th style="text-align: right;">wRC</th>
-<th style="text-align: right;">WAR</th>
-<th style="text-align: right;">WAROld</th>
-<th style="text-align: right;">avg_plus</th>
-<th style="text-align: right;">slg_plus</th>
-<th style="text-align: right;">hrfb_pct_plus</th>
-<th style="text-align: right;">soft_pct_plus</th>
-<th style="text-align: right;">med_pct_plus</th>
-<th style="text-align: right;">hard_pct_plus</th>
-<th style="text-align: right;">xwOBA</th>
-<th style="text-align: right;">xAVG</th>
-<th style="text-align: right;">xSLG</th>
-<th style="text-align: right;">AvgBatSpeed</th>
-<th style="text-align: right;">AttackAngle</th>
-<th style="text-align: right;">AttackDirection</th>
-<th style="text-align: right;">IdealAttackAngle_pct</th>
-<th style="text-align: right;">EV</th>
-<th style="text-align: right;">LA</th>
-<th style="text-align: right;">Barrels</th>
-<th style="text-align: right;">Barrel_pct</th>
-<th style="text-align: right;">maxEV</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">2024</td>
-<td style="text-align: left;">NYY</td>
-<td style="text-align: right;">1352</td>
-<td style="text-align: right;">857</td>
-<td style="text-align: right;">243</td>
-<td style="text-align: right;">15</td>
-<td style="text-align: right;">237</td>
-<td style="text-align: right;">815</td>
-<td style="text-align: right;">782</td>
-<td style="text-align: right;">672</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">1326</td>
-<td style="text-align: right;">49</td>
-<td style="text-align: right;">88</td>
-<td style="text-align: right;">0.2481</td>
-<td style="text-align: right;">1776</td>
-<td style="text-align: right;">1557</td>
-<td style="text-align: right;">0.4286</td>
-<td style="text-align: right;">0.7615</td>
-<td style="text-align: right;">0.2827</td>
-<td style="text-align: right;">0.3306</td>
-<td style="text-align: right;">104.7926</td>
-<td style="text-align: right;">835.3207</td>
-<td style="text-align: right;">34.5191</td>
-<td style="text-align: right;">34.1529</td>
-<td style="text-align: right;">103.4864</td>
-<td style="text-align: right;">108.6500</td>
-<td style="text-align: right;">134.2629</td>
-<td style="text-align: right;">90.7584</td>
-<td style="text-align: right;">98.7781</td>
-<td style="text-align: right;">106.9142</td>
-<td style="text-align: right;">0.3460</td>
-<td style="text-align: right;">0.2515</td>
-<td style="text-align: right;">0.4526</td>
-<td style="text-align: right;">72.1031</td>
-<td style="text-align: right;">9.9065</td>
-<td style="text-align: right;">1.6836</td>
-<td style="text-align: right;">0.5438</td>
-<td style="text-align: right;">90.1105</td>
-<td style="text-align: right;">12.7093</td>
-<td style="text-align: right;">442</td>
-<td style="text-align: right;">0.1053</td>
-<td style="text-align: right;">120.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2024</td>
-<td style="text-align: left;">ARI</td>
-<td style="text-align: right;">1452</td>
-<td style="text-align: right;">933</td>
-<td style="text-align: right;">271</td>
-<td style="text-align: right;">37</td>
-<td style="text-align: right;">211</td>
-<td style="text-align: right;">886</td>
-<td style="text-align: right;">845</td>
-<td style="text-align: right;">569</td>
-<td style="text-align: right;">17</td>
-<td style="text-align: right;">1265</td>
-<td style="text-align: right;">84</td>
-<td style="text-align: right;">119</td>
-<td style="text-align: right;">0.2629</td>
-<td style="text-align: right;">1866</td>
-<td style="text-align: right;">1594</td>
-<td style="text-align: right;">0.4401</td>
-<td style="text-align: right;">0.7773</td>
-<td style="text-align: right;">0.3018</td>
-<td style="text-align: right;">0.3366</td>
-<td style="text-align: right;">133.0406</td>
-<td style="text-align: right;">868.1308</td>
-<td style="text-align: right;">34.3844</td>
-<td style="text-align: right;">34.7517</td>
-<td style="text-align: right;">106.5257</td>
-<td style="text-align: right;">108.9479</td>
-<td style="text-align: right;">110.8894</td>
-<td style="text-align: right;">97.0032</td>
-<td style="text-align: right;">99.0817</td>
-<td style="text-align: right;">103.0412</td>
-<td style="text-align: right;">0.3335</td>
-<td style="text-align: right;">0.2524</td>
-<td style="text-align: right;">0.4241</td>
-<td style="text-align: right;">71.5115</td>
-<td style="text-align: right;">9.5006</td>
-<td style="text-align: right;">-0.5133</td>
-<td style="text-align: right;">0.5032</td>
-<td style="text-align: right;">89.1465</td>
-<td style="text-align: right;">12.7375</td>
-<td style="text-align: right;">346</td>
-<td style="text-align: right;">0.0792</td>
-<td style="text-align: right;">117.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2024</td>
-<td style="text-align: left;">LAD</td>
-<td style="text-align: right;">1423</td>
-<td style="text-align: right;">873</td>
-<td style="text-align: right;">291</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">233</td>
-<td style="text-align: right;">842</td>
-<td style="text-align: right;">815</td>
-<td style="text-align: right;">602</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">1336</td>
-<td style="text-align: right;">64</td>
-<td style="text-align: right;">136</td>
-<td style="text-align: right;">0.2577</td>
-<td style="text-align: right;">1631</td>
-<td style="text-align: right;">1691</td>
-<td style="text-align: right;">0.4464</td>
-<td style="text-align: right;">0.7812</td>
-<td style="text-align: right;">0.2972</td>
-<td style="text-align: right;">0.3371</td>
-<td style="text-align: right;">136.2452</td>
-<td style="text-align: right;">867.9430</td>
-<td style="text-align: right;">32.6877</td>
-<td style="text-align: right;">35.9570</td>
-<td style="text-align: right;">104.3981</td>
-<td style="text-align: right;">110.5171</td>
-<td style="text-align: right;">115.4272</td>
-<td style="text-align: right;">92.7457</td>
-<td style="text-align: right;">99.6529</td>
-<td style="text-align: right;">104.2426</td>
-<td style="text-align: right;">0.3382</td>
-<td style="text-align: right;">0.2523</td>
-<td style="text-align: right;">0.4444</td>
-<td style="text-align: right;">71.3356</td>
-<td style="text-align: right;">9.9072</td>
-<td style="text-align: right;">-0.4496</td>
-<td style="text-align: right;">0.4986</td>
-<td style="text-align: right;">89.3972</td>
-<td style="text-align: right;">15.5284</td>
-<td style="text-align: right;">391</td>
-<td style="text-align: right;">0.0919</td>
-<td style="text-align: right;">119.2</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2024</td>
-<td style="text-align: left;">BAL</td>
-<td style="text-align: right;">1391</td>
-<td style="text-align: right;">861</td>
-<td style="text-align: right;">262</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">235</td>
-<td style="text-align: right;">786</td>
-<td style="text-align: right;">759</td>
-<td style="text-align: right;">489</td>
-<td style="text-align: right;">14</td>
-<td style="text-align: right;">1359</td>
-<td style="text-align: right;">64</td>
-<td style="text-align: right;">98</td>
-<td style="text-align: right;">0.2499</td>
-<td style="text-align: right;">1718</td>
-<td style="text-align: right;">1717</td>
-<td style="text-align: right;">0.4354</td>
-<td style="text-align: right;">0.7508</td>
-<td style="text-align: right;">0.2877</td>
-<td style="text-align: right;">0.3244</td>
-<td style="text-align: right;">70.6088</td>
-<td style="text-align: right;">793.0653</td>
-<td style="text-align: right;">27.7178</td>
-<td style="text-align: right;">27.6024</td>
-<td style="text-align: right;">104.2339</td>
-<td style="text-align: right;">110.3735</td>
-<td style="text-align: right;">120.7240</td>
-<td style="text-align: right;">94.3429</td>
-<td style="text-align: right;">95.6265</td>
-<td style="text-align: right;">110.4095</td>
-<td style="text-align: right;">0.3280</td>
-<td style="text-align: right;">0.2473</td>
-<td style="text-align: right;">0.4341</td>
-<td style="text-align: right;">72.5088</td>
-<td style="text-align: right;">9.5182</td>
-<td style="text-align: right;">0.2840</td>
-<td style="text-align: right;">0.4994</td>
-<td style="text-align: right;">89.7025</td>
-<td style="text-align: right;">14.5005</td>
-<td style="text-align: right;">381</td>
-<td style="text-align: right;">0.0894</td>
-<td style="text-align: right;">114.4</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">2024</td>
-<td style="text-align: left;">MIL</td>
-<td style="text-align: right;">1359</td>
-<td style="text-align: right;">900</td>
-<td style="text-align: right;">249</td>
-<td style="text-align: right;">33</td>
-<td style="text-align: right;">177</td>
-<td style="text-align: right;">777</td>
-<td style="text-align: right;">742</td>
-<td style="text-align: right;">597</td>
-<td style="text-align: right;">19</td>
-<td style="text-align: right;">1459</td>
-<td style="text-align: right;">46</td>
-<td style="text-align: right;">217</td>
-<td style="text-align: right;">0.2484</td>
-<td style="text-align: right;">1816</td>
-<td style="text-align: right;">1438</td>
-<td style="text-align: right;">0.4030</td>
-<td style="text-align: right;">0.7285</td>
-<td style="text-align: right;">0.3054</td>
-<td style="text-align: right;">0.3185</td>
-<td style="text-align: right;">41.7954</td>
-<td style="text-align: right;">763.5501</td>
-<td style="text-align: right;">27.6815</td>
-<td style="text-align: right;">26.7425</td>
-<td style="text-align: right;">100.6138</td>
-<td style="text-align: right;">99.7635</td>
-<td style="text-align: right;">103.1123</td>
-<td style="text-align: right;">104.3568</td>
-<td style="text-align: right;">98.7264</td>
-<td style="text-align: right;">99.9167</td>
-<td style="text-align: right;">0.3143</td>
-<td style="text-align: right;">0.2378</td>
-<td style="text-align: right;">0.3925</td>
-<td style="text-align: right;">71.7573</td>
-<td style="text-align: right;">9.4352</td>
-<td style="text-align: right;">-1.1072</td>
-<td style="text-align: right;">0.5086</td>
-<td style="text-align: right;">88.6249</td>
-<td style="text-align: right;">11.5129</td>
-<td style="text-align: right;">293</td>
-<td style="text-align: right;">0.0720</td>
-<td style="text-align: right;">118.1</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">2024</td>
-<td style="text-align: left;">SDP</td>
-<td style="text-align: right;">1456</td>
-<td style="text-align: right;">989</td>
-<td style="text-align: right;">259</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">190</td>
-<td style="text-align: right;">760</td>
-<td style="text-align: right;">726</td>
-<td style="text-align: right;">458</td>
-<td style="text-align: right;">18</td>
-<td style="text-align: right;">1077</td>
-<td style="text-align: right;">56</td>
-<td style="text-align: right;">120</td>
-<td style="text-align: right;">0.2635</td>
-<td style="text-align: right;">1879</td>
-<td style="text-align: right;">1646</td>
-<td style="text-align: right;">0.4200</td>
-<td style="text-align: right;">0.7445</td>
-<td style="text-align: right;">0.2951</td>
-<td style="text-align: right;">0.3236</td>
-<td style="text-align: right;">65.3117</td>
-<td style="text-align: right;">779.2289</td>
-<td style="text-align: right;">26.7585</td>
-<td style="text-align: right;">26.7777</td>
-<td style="text-align: right;">106.7418</td>
-<td style="text-align: right;">103.9856</td>
-<td style="text-align: right;">96.6985</td>
-<td style="text-align: right;">94.1713</td>
-<td style="text-align: right;">103.7079</td>
-<td style="text-align: right;">96.7785</td>
-<td style="text-align: right;">0.3331</td>
-<td style="text-align: right;">0.2665</td>
-<td style="text-align: right;">0.4304</td>
-<td style="text-align: right;">70.5285</td>
-<td style="text-align: right;">7.7539</td>
-<td style="text-align: right;">-1.0671</td>
-<td style="text-align: right;">0.4811</td>
-<td style="text-align: right;">89.0992</td>
-<td style="text-align: right;">13.1784</td>
-<td style="text-align: right;">321</td>
-<td style="text-align: right;">0.0711</td>
-<td style="text-align: right;">116.7</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="database-designing" class="level3">
-<h3 class="anchored" data-anchor-id="database-designing">Database Designing</h3>
-<ul>
-<li>Below is the designing for the team_pitching table (one of three tables being added to the database), which will then be connected to the written csv holding the real data.</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="sc">--</span> Re<span class="sc">-</span>create with flexible <span class="cn">NULL</span> constraints</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>CREATE TABLE <span class="fu">team_pitching</span> (</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    Season SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    team_name <span class="fu">VARCHAR</span>(<span class="dv">50</span>) NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    W SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    L SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    ERA DOUBLE,           </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    G SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    QS SMALLINT,          </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    CG SMALLINT,          </span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    SV SMALLINT,      </span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    BS SMALLINT,    </span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    H SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    R SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    ER SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    HR SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    BB SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>    HBP SMALLINT,         </span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>    BK SMALLINT,          </span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>    SO SMALLINT NOT <span class="cn">NULL</span>,</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    Balls INTEGER,  </span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    Strikes INTEGER,      </span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    FIP DOUBLE,           </span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    LD_pct DOUBLE,       </span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    GB_pct DOUBLE,    </span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    HR_FB DOUBLE,       </span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>    FBall_pct DOUBLE,   </span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>    SL_pct DOUBLE,    </span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>    CT_pct DOUBLE,     </span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    CB_pct DOUBLE,    </span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    CH_pct DOUBLE,        </span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>    K_pct DOUBLE,      </span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    Zone_pct DOUBLE,      </span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    BB_pct DOUBLE,      </span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>    <span class="st">"K-BB_pct"</span> DOUBLE, </span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    PRIMARY <span class="fu">KEY</span> (Season, team_name));</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="fu">head</span>(team_batting_all))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
 </section>
 </section>
 <section id="primary-query" class="level2">
@@ -666,19 +298,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>First joining the team_pitching and team_fielding data frames <br></li>
 <li>Keeping only rows in 2024 season and removing NA’s</li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> joined_data <span class="kw">AS</span> (</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        p.Season,       </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        p.team_name,    </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>        p.ERA,          </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>        f.OAA,          <span class="co">-- Outs Above Average</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        f.DRS           <span class="co">-- Defensive Runs Saved</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> team_pitching <span class="kw">AS</span> p</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> team_fielding <span class="kw">AS</span> f</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">ON</span> p.Season <span class="op">=</span> f.Season</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> p.team_name <span class="op">=</span> f.team_name</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> p.Season <span class="op">=</span> <span class="dv">2024</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> f.OAA <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>),</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> joined_data <span class="kw">AS</span> (</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        p.Season,       </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        p.team_name,    </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        p.ERA,          </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        f.OAA,          <span class="co">-- Outs Above Average</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        f.DRS           <span class="co">-- Defensive Runs Saved</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> team_pitching <span class="kw">AS</span> p</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> team_fielding <span class="kw">AS</span> f</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        <span class="kw">ON</span> p.Season <span class="op">=</span> f.Season</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> p.team_name <span class="op">=</span> f.team_name</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> p.Season <span class="op">=</span> <span class="dv">2024</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">AND</span> f.OAA <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>),</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
 <li><p>Now I am classifying each team into a defensive tier using <code>OAA</code> and <code>DRS</code>.</p>
 <ul>
@@ -688,31 +320,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>The <code>CASE</code> statement works like an if/else structure: teams with strong values in both metrics are labeled <strong>Excellent Defense</strong>, teams with weak values in both are labeled <strong>Poor Defense</strong>, and all others are labeled <strong>Mediocre Defense</strong>.</p></li>
 <li><p>The new <code>defense_tier</code> variable is then used to color the ERA plot and compare defensive performance with run prevention.</p></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>SELECT</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>        Season,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>        team_name,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>        ERA,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>        OAA,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>        DRS,</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>        CASE</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>            WHEN</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>                (CASE WHEN OAA <span class="sc">&gt;=</span> <span class="dv">25</span> THEN <span class="dv">1</span> ELSE <span class="dv">0</span> END) <span class="sc">+</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>                (CASE WHEN DRS <span class="sc">&gt;=</span> <span class="dv">5</span> THEN <span class="dv">1</span> ELSE <span class="dv">0</span> END) <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>            THEN <span class="st">'Excellent Defense'</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>            WHEN</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>                (CASE WHEN OAA <span class="sc">&lt;=</span> <span class="dv">0</span> THEN <span class="dv">1</span> ELSE <span class="dv">0</span> END) <span class="sc">+</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>                (CASE WHEN DRS <span class="sc">&lt;=</span> <span class="dv">0</span> THEN <span class="dv">1</span> ELSE <span class="dv">0</span> END) <span class="ot">=</span> <span class="dv">2</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>            THEN <span class="st">'Poor Defense'</span></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>            ELSE <span class="st">'Mediocre Defense'</span></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        END AS defense_tier</span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    FROM joined_data<span class="er">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="visualization" class="level3">
-<h3 class="anchored" data-anchor-id="visualization">Visualization</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>SELECT</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>        Season,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>        team_name,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>        ERA,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>        OAA,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>        DRS,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>        CASE</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>            WHEN</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>                (CASE WHEN OAA <span class="sc">&gt;=</span> <span class="dv">25</span> THEN <span class="dv">1</span> ELSE <span class="dv">0</span> END) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>                (CASE WHEN DRS <span class="sc">&gt;=</span> <span class="dv">5</span> THEN <span class="dv">1</span> ELSE <span class="dv">0</span> END) <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>            THEN <span class="st">'Excellent Defense'</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>            WHEN</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                (CASE WHEN OAA <span class="sc">&lt;=</span> <span class="dv">0</span> THEN <span class="dv">1</span> ELSE <span class="dv">0</span> END) <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>                (CASE WHEN DRS <span class="sc">&lt;=</span> <span class="dv">0</span> THEN <span class="dv">1</span> ELSE <span class="dv">0</span> END) <span class="ot">=</span> <span class="dv">2</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>            THEN <span class="st">'Poor Defense'</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>            ELSE <span class="st">'Mediocre Defense'</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        END AS defense_tier</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>    FROM joined_data<span class="er">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+<section id="qvisualization" class="level3">
+<h3 class="anchored" data-anchor-id="qvisualization">qVisualization</h3>
 <p>The plot below orders teams by ERA, with better run prevention on the left and worse run prevention on the right. Each team is colored by a defensive tier created from its 2024 OAA and DRS values. Overall, the visualization suggests that defense may relate to ERA, since poor defensive teams generally appear more often in the mid-to-high ERA range. However, the colors are still mixed across the plot, and even strong or mediocre defensive teams cover a wide range of ERAs. This shows that defense matters, but ERA is also shaped by other factors like pitching talent, strikeouts, walks, and home runs allowed.</p>
 <p><img src="images/Screenshot 2026-04-30.png" class="tr-project-card img-fluid"></p>
 

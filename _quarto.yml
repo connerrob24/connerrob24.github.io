@@ -16,12 +16,16 @@ website:
             text: Timber Rattlers Practicum
           - href: bus_model.qmd
             text: Business & Entrepreneurship UPI Model
-      - text: STAT 405
-        menu:
-          - href: sql_project.qmd
-            text: SQL Database
-          - href: text_analysis.qmd
-            text: Text Analysis
+      - text: STAT 405 
+        menu: 
+          - href: sql_project.qmd 
+            text: SQL Database 
+          - href: text_analysis.qmd 
+            text: Text Analysis 
+          - href: package.qmd 
+            text: Webgem Package 
+          - href: poster.qmd
+            text: KFYO Poster Project
 
 format:
   html:

@@ -5,10 +5,14 @@ toc: true
 format: html
 ---
 
-NOTE: This was a joint project worked on with Brett Hartlaub
-
 <i class="bi bi-github"></i> <a
 href="https://github.com/ADC-405-S26/Project_2_SQL_Team_11" target="_blank">GitHub Repo</a>
+
+::: {.callout-note}
+## NOTE:
+
+This was a joint project worked on with Brett Hartlaub
+:::
 
 ## Data
 
@@ -22,6 +26,8 @@ team_pitching_all_unfiltered <- map_dfr(
   years,
   ~ fg_team_pitcher(startseason = .x, endseason = .x))
 ```
+
+---
 
 ### Data Cleaning
 
@@ -43,7 +49,7 @@ team_batting_all <- team_batting_all_unfiltered |>  select(-c(3:7, 19:21, 23, 27
     hard_pct_plus = `Hard_pct+`)
 ```
 
-```{r}
+```r
 #| include: false
 
 library(baseballr)
@@ -69,62 +75,19 @@ team_batting_all <- team_batting_all_unfiltered |>  select(-c(3:7, 19:21, 23, 27
     soft_pct_plus = `Soft_pct+`,
     med_pct_plus = `Med_pct+`,
     hard_pct_plus = `Hard_pct+`)
-
 ```
 
 ::: {style="text-align: center;"}
 **Sample Table**
 :::
 
-```{r}
+```r
 #| echo: false
 
 knitr::kable(head(team_batting_all))
 ```
 
-### Database Designing
-
--   Below is the designing for the team_pitching table (one of three tables being added to the database), which will then be connected to the written csv holding the real data.
-
-``` r
--- Re-create with flexible NULL constraints
-CREATE TABLE team_pitching (
-    Season SMALLINT NOT NULL,
-    team_name VARCHAR(50) NOT NULL,
-    W SMALLINT NOT NULL,
-    L SMALLINT NOT NULL,
-    ERA DOUBLE,           
-    G SMALLINT NOT NULL,
-    QS SMALLINT,          
-    CG SMALLINT,          
-    SV SMALLINT,      
-    BS SMALLINT,    
-    H SMALLINT NOT NULL,
-    R SMALLINT NOT NULL,
-    ER SMALLINT NOT NULL,
-    HR SMALLINT NOT NULL,
-    BB SMALLINT NOT NULL,
-    HBP SMALLINT,         
-    BK SMALLINT,          
-    SO SMALLINT NOT NULL,
-    Balls INTEGER,  
-    Strikes INTEGER,      
-    FIP DOUBLE,           
-    LD_pct DOUBLE,       
-    GB_pct DOUBLE,    
-    HR_FB DOUBLE,       
-    FBall_pct DOUBLE,   
-    SL_pct DOUBLE,    
-    CT_pct DOUBLE,     
-    CB_pct DOUBLE,    
-    CH_pct DOUBLE,        
-    K_pct DOUBLE,      
-    Zone_pct DOUBLE,      
-    BB_pct DOUBLE,      
-    "K-BB_pct" DOUBLE, 
-
-    PRIMARY KEY (Season, team_name));
-```
+---
 
 ## Primary Query
 
@@ -184,7 +147,9 @@ SELECT
     FROM joined_data)
 ```
 
-### Visualization
+---
+
+### qVisualization
 
 The plot below orders teams by ERA, with better run prevention on the left and worse run prevention on the right. Each team is colored by a defensive tier created from its 2024 OAA and DRS values. Overall, the visualization suggests that defense may relate to ERA, since poor defensive teams generally appear more often in the mid-to-high ERA range. However, the colors are still mixed across the plot, and even strong or mediocre defensive teams cover a wide range of ERAs. This shows that defense matters, but ERA is also shaped by other factors like pitching talent, strikeouts, walks, and home runs allowed.
 

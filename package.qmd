@@ -1,0 +1,251 @@
+---
+title: "package"
+format: html
+---
+
+## Summary of `webgem` Package
+
+::: {.package-hero}
+
+`webgem` is an R package designed to help users summarize and visualize baseball performance data. The package includes functions for ranking player metrics, creating hitter profiles, and building radar-style visualizations that make player strengths and weaknesses easier to compare and understand.
+
+*For deeper explanation and examples, visit the github repository* [{{< fa brands github >}}](https://github.com/ADC-405-S26/webgem)
+:::
+
+### Installation
+
+*You can install the development version of `webgem` from GitHub with:*
+
+```r
+# install.packages("remotes")
+# install.packages("devtools")
+devtools::install_github("ADC-405-S26/webgem")
+```
+
+```r
+library(webgem)
+```
+
+## Primary Functions
+
+::: {.grid .function-grid}
+
+::: {.g-col-4}
+::: {.card .function-card}
+### `metricRank()`
+
+Ranks players based on selected performance metrics. This function helps compare athletes and identify which players stand out in specific areas.
+:::
+:::
+
+::: {.g-col-4}
+::: {.card .function-card}
+### `hitterProfile()`
+
+Creates a hitter summary profile that organizes important offensive information into a clean, readable format.
+:::
+:::
+
+::: {.g-col-4}
+::: {.card .function-card}
+### `hitterRadar()`
+
+Builds a radar-style chart to show a hitter’s strengths across multiple metrics. This makes it easier to compare performance categories visually.
+:::
+:::
+
+:::
+
+```{r}
+#| echo: false
+library(webgem)
+```
+
+
+## hitterRadar examples
+
+**code portion**
+
+::: {.panel-tabset}
+
+## example 1
+
+```{r}
+#| echo: true
+#| eval: false
+
+library(webgem)
+
+player_data <- webgem_data[webgem_data$player == "Drake Baldwin", ]
+
+baldwin_profile <- hitterProfile(
+  player = player_data$player,
+  wrc_plus = player_data$wrc_plus,
+  bb_pct = player_data$bb_pct,
+  ops = player_data$ops,
+  slg = player_data$slg,
+  obp = player_data$obp
+)
+
+hitterRadar(baldwin_profile)
+
+
+```
+
+
+## example 2
+
+```{r}
+#| echo: true
+#| eval: false
+
+player_data <- webgem_data[webgem_data$player == "Dillon Dingler", ]
+
+dingler_profile <- hitterProfile(
+  player = player_data$player,
+  slg = player_data$slg,
+  ops = player_data$ops,
+  avg = player_data$avg,
+  iso = player_data$iso,
+  obp = player_data$obp,
+  war = player_data$war
+)
+
+hitterRadar(dingler_profile)
+
+```
+
+## example 3
+
+```{r}
+#| echo: true
+#| eval: false
+
+player_data <- webgem_data[webgem_data$player == "Rafael Devers", ]
+
+devers_profile <- hitterProfile(
+  player = player_data$player,
+  ops = player_data$ops,
+  avg = player_data$avg,
+  woba = player_data$woba,
+  barrel_pct = player_data$iso,
+  iso = player_data$iso,
+  wrc_plus = player_data$wrc_plus
+)
+
+hitterRadar(devers_profile)
+
+```
+
+## example 4
+
+```{r}
+#| echo: true
+#| eval: false
+
+player_data <- webgem_data[webgem_data$player == "Yordan Alvares", ]
+
+alvares_profile <- hitterProfile(
+  player = player_data$player,
+  avg = player_data$avg,
+  bb_pct = player_data$bb_pct,
+  hard_hit_pct = player_data$hard_hit_pct,
+  obp = player_data$obp,
+  wrc_plus = player_data$wrc_plus
+)
+
+hitterRadar(alvares_profile)
+
+```
+
+:::
+
+**plot portion**
+
+*code ex. number correlates to the numbered plot*
+
+::: {.panel-tabset}
+
+## example 1
+
+```{r}
+#| echo: false
+
+player_data <- webgem_data[webgem_data$player == "Drake Baldwin", ]
+
+baldwin_profile <- hitterProfile(
+  player = player_data$player,
+  wrc_plus = player_data$wrc_plus,
+  bb_pct = player_data$bb_pct,
+  ops = player_data$ops,
+  slg = player_data$slg,
+  obp = player_data$obp
+)
+
+hitterRadar(baldwin_profile)
+
+```
+
+## example 2
+
+```{r}
+#| echo: false
+
+player_data <- webgem_data[webgem_data$player == "Dillon Dingler", ]
+
+dingler_profile <- hitterProfile(
+  player = player_data$player,
+  slg = player_data$slg,
+  ops = player_data$ops,
+  avg = player_data$avg,
+  iso = player_data$iso,
+  obp = player_data$obp,
+  war = player_data$war
+)
+
+hitterRadar(dingler_profile)
+
+```
+
+## example 3
+
+```{r}
+#| echo: false
+
+player_data <- webgem_data[webgem_data$player == "Rafael Devers", ]
+
+devers_profile <- hitterProfile(
+  player = player_data$player,
+  ops = player_data$ops,
+  avg = player_data$avg,
+  woba = player_data$woba,
+  barrel_pct = player_data$iso,
+  iso = player_data$iso,
+  wrc_plus = player_data$wrc_plus
+)
+
+hitterRadar(devers_profile)
+
+```
+
+## example 4
+
+```{r}
+#| echo: false
+
+player_data <- webgem_data[webgem_data$player == "Yordan Alvares", ]
+
+alvares_profile <- hitterProfile(
+  player = player_data$player,
+  avg = player_data$avg,
+  bb_pct = player_data$bb_pct,
+  hard_hit_pct = player_data$hard_hit_pct,
+  obp = player_data$obp,
+  wrc_plus = player_data$wrc_plus
+)
+
+hitterRadar(alvares_profile)
+
+```
+
+:::

@@ -7,7 +7,11 @@ format: html
 <i class="bi bi-github"></i> <a
 href="https://github.com/ADC-405-S26/Project_3_TextAnalysis_Team_7" target="_blank">GitHub Repo</a>
 
-Note: This was a joint project done with Will Zatkowski
+::: {.callout-note}
+## NOTE:
+
+This was a joint project done with Will Zatkowski
+:::
 
 ## Introduction & Background
 
@@ -436,9 +440,7 @@ theme_scores <- focus_tfidf_tidy |>
   mutate(
     normalized_theme_score = raw_theme_score / number_of_terms)
    
-
 head(theme_scores)
-
 ```
 
 We first wanted to compare the Gospels through the specific types of language they emphasize. To do so, we split core words and phrases throughout the bible into 6 themes for later sentiment analysis: forgiveness, love, faith, miracles, evil, and death. Focusing on a smaller subset of words forces the analysis to center more directly on the theological and emotional language that shapes each Gospel. However, using sentiment analysis with religious phrases and wording can become quite buggy. Therefore, we had to manually create a 'lexicon' that not only categorized the custom set of words into these themes, but also gave a connotation score from -2 to 2: negative values represent darker or conflict-oriented language and positive values represent redemptive or hopeful language.
@@ -471,7 +473,6 @@ focus_tfidf_tidy |>
   # knitr::kable() is better for formatting the table so it looks cleaner in final render
   knitr::kable(
     caption = "Sample of focus words after converting TF-IDF output into tidy format")
-
 ```
 
 Now we visualized these scores using a heatmap, with the x-axis comparing Matthew, Mark, Luke, and John, and the y-axis listing the six themes. Each tile represents one Gospel-theme combination, with the color and number showing whether that theme is more positively or negatively weighted in that Gospel. Strong positive values indicate that a theme is being shaped by words that are both distinctive to that Gospel and positively coded. Strong negative values indicate that a theme is being shaped by words that are both distinctive to that Gospel and negatively coded. These values are the normalized theme scores multiplied by 1000, which was done only to make the very small TF-IDF-based values easier to read on the plot.
@@ -534,5 +535,5 @@ ggplot(theme_scores_display,
 
 Luke, Mark, and Matthew all demonstrate strong similarities in the forgiveness, miracles, and faith themes. Forgiveness appears to be heavily significant across these three Gospels, with Luke having the highest weighted connotation score at 2.3, followed by Mark at 1.8 and Matthew at 1.7. In contrast, the textual data in John results in a value of 0...
 
-Check out [our pdf](https://drive.google.com/file/d/1N7kFC9q3tKnOqyLSO3LXhZtbjc_K8R5H/view?usp=sharing) for a deeper analyis.
+Check out [our pdf](https://drive.google.com/file/d/1N7kFC9q3tKnOqyLSO3LXhZtbjc_K8R5H/view?usp=sharing) for the full analyis.
 
