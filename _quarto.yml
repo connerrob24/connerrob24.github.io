@@ -19,9 +19,9 @@ website:
       - text: STAT 405 
         menu: 
           - href: sql_project.qmd 
-            text: SQL Database 
+            text: SQL Database Creation
           - href: text_analysis.qmd 
-            text: Text Analysis 
+            text: Textual Analysis of the Four Gospels
           - href: package.qmd 
             text: Webgem Package 
           - href: poster.qmd

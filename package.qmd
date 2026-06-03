@@ -1,6 +1,8 @@
 ---
 title: "`webgem` Package"
 format: html
+page-layout: full
+toc: false
 ---
 
 ::: {.package-hero}
@@ -170,6 +172,9 @@ hitterRadar(alvares_profile)
 
 ```{r}
 #| echo: false
+#| fig-width: 9
+#| fig-height: 7
+#| out-width: "100%"
 
 player_data <- webgem_data[webgem_data$player == "Drake Baldwin", ]
 
@@ -190,6 +195,9 @@ hitterRadar(baldwin_profile)
 
 ```{r}
 #| echo: false
+#| fig-width: 9
+#| fig-height: 7
+#| out-width: "100%"
 
 player_data <- webgem_data[webgem_data$player == "Dillon Dingler", ]
 
@@ -211,6 +219,9 @@ hitterRadar(dingler_profile)
 
 ```{r}
 #| echo: false
+#| fig-width: 9
+#| fig-height: 7
+#| out-width: "100%"
 
 player_data <- webgem_data[webgem_data$player == "Rafael Devers", ]
 
@@ -232,6 +243,9 @@ hitterRadar(devers_profile)
 
 ```{r}
 #| echo: false
+#| fig-width: 9
+#| fig-height: 7
+#| out-width: "100%"
 
 player_data <- webgem_data[webgem_data$player == "Yordan Alvares", ]
 

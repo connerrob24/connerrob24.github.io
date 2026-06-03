@@ -1,7 +1,8 @@
 ---
-title: "Package Presentation: `stylo`"
+title: "An Exploratory Analysis of the `stylo` R Package"
 format: html
 page-layout: full
+toc: false
 ---
 
 <i class="bi bi-box-arrow-up-right"></i>

@@ -120,11 +120,11 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-stat-405">    
         <li>
     <a class="dropdown-item" href="./sql_project.html">
- <span class="dropdown-text">SQL Database</span></a>
+ <span class="dropdown-text">SQL Database Creation</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./text_analysis.html">
- <span class="dropdown-text">Text Analysis</span></a>
+ <span class="dropdown-text">Textual Analysis of the Four Gospels</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./package.html">
@@ -151,18 +151,9 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#article-snapshot" id="toc-article-snapshot" class="nav-link active" data-scroll-target="#article-snapshot">Article Snapshot</a></li>
-  <li><a href="#review-breakdown" id="toc-review-breakdown" class="nav-link" data-scroll-target="#review-breakdown">Review Breakdown</a></li>
-  </ul>
-</nav>
-    </div>
+    
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -171,7 +162,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta column-page-left">
+<div class="quarto-title-meta column-page">
 
     
   
@@ -199,6 +190,7 @@ Note
 <div class="poster-hero">
 <p><a href="http://rpubs.com/nickkatz625/1437798" class="btn btn-primary">View Poster</a></p>
 </div>
+<hr>
 <div class="grid article-top">
 <div class="g-col-4">
 <section id="article-reviewed" class="level3 article-title-box">
@@ -220,7 +212,7 @@ Note
 <div class="g-col-4">
 <section id="main-problem" class="level3 card">
 <h3 class="anchored" data-anchor-id="main-problem">Main Problem</h3>
-<p>Professional baseball tracking systems are powerful, but they are often expensive and difficult for amateur athletes, coaches, and smaller programs to access.</p>
+<p>Professional baseball tracking systems are powerful, but they are often expensive and difficult for amateur athletes, coaches, and smaller programs to access. To counteract the difficulty behind tracking a baseball; it is small, moves at high speeds, and often blurs on camera, researched decided to utilize deep learning.</p>
 </section>
 </div>
 <div class="g-col-4">
@@ -230,37 +222,65 @@ Note
 </section>
 </div>
 <div class="g-col-4">
-<section id="big-idea" class="level3 card">
-<h3 class="anchored" data-anchor-id="big-idea">Big Idea</h3>
-<p>The goal is to create a lower-cost way to analyze pitch speed, trajectory, and movement from more accessible video sources.</p>
+<section id="objective" class="level3 card">
+<h3 class="anchored" data-anchor-id="objective">Objective</h3>
+<p>To create a model capable of analyzing video without a multi-camera system (ideally, any regular video) and, from that video, reconstruct ball speed, trajectory, and rotation. More specifically, to detect small, fast-moving objects in real-time video using their newest model. Finally, to provide a low-cost, scalable alternative to commercial baseball tracking systems for training and performance analysis.</p>
 </section>
 </div>
 </div>
+<hr>
 </section>
-<section id="review-breakdown" class="level2">
-<h2 class="anchored" data-anchor-id="review-breakdown">Review Breakdown</h2>
+<section id="methodology-breakdown" class="level2">
+<h2 class="anchored" data-anchor-id="methodology-breakdown">Methodology Breakdown</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Problem &amp; Objective</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Methodology</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Limitations</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Reflection</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Workflow Overview</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">YOLO deep learning system</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Kalman Filter Tracking</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<p>The article focuses on the accessibility gap in baseball performance technology. Major League Baseball and professional organizations have access to advanced systems that track pitch movement, spin, speed, and trajectory, but many amateur players and smaller programs do not.</p>
-<p>The main objective is to explore whether machine learning can help analyze baseball video in a more affordable and scalable way.</p>
+<div class="text-center">
+<p><img src="images/method_1.png" class="img-fluid" style="width: 90%; border-radius: 15px;"></p>
+</div>
+<p>This workflow shows the full pitch-evaluation pipeline used in the study. The process begins with video data, breaks the video into frames, identifies and labels the baseball and bat, applies image preprocessing, and then uses the YOLOv12 model and Kalman filter to support ball movement detection.</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<p>The researchers use YOLOv12, an object detection model, to identify baseballs and bats in individual video frames. After detection, a Kalman filter helps predict the ball’s movement across frames when the ball is blurred, moving quickly, or temporarily difficult to detect.</p>
-<p>The study also connects the tracking process to aerodynamic ideas such as gravity, drag, and Magnus force.</p>
+<div class="text-center">
+<p><img src="images/method_2.png" class="img-fluid" style="width: 50%; height: 700px; object-fit: cover; border-radius: 15px;"></p>
+</div>
+<p>Yolo, or “you only look once,” is an object detection model that scans an image once and predicts two things: where an object is located and what the object is (its category). Essentially, it takes a frame and identifies that something is a baseball and where that baseball is located in the frame.</p>
+<p><em>In this article, the researchers specifically implement the YOLOv12 model, which is a newer version of the YOLO framework</em></p>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="kalman-ascii">
+<pre>Frame 1        Frame 2        Frame 3        Frame 4
+  ●  --------&gt;   ●  --------&gt;   ?  --------&gt;   ●
+detected      detected       missed       predicted
+</pre>
+</div>
+<p>The Kalman filter helps track the baseball after it has been detected in individual video frames. Since the ball moves quickly and can become blurry, YOLO may not identify it perfectly in every frame.</p>
+<p>It uses the ball’s previous position and movement to estimate where it should appear next. To be more specific, the filter tracks four variables: the ball’s horizontal position, vertical position, horizontal velocity, and vertical velocity. It takes the object’s (ball’s) position and velocity in a given image and uses those metrics to predict where that object should be in the next frame.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Why this matters
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As explained, the ball can be difficult to detect in regular video. The Kalman filter thus helps fill in the gaps where it may be less clear in the frame by predicting the ball’s location when detection is uncertain.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<hr>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
 <p>One important limitation is that baseballs are small, fast, and often blurred on camera, which makes detection difficult. The model also had more examples of bats than baseballs, creating an imbalance in the training data.</p>
 <p>Another limitation is that the tracking process simplifies some real-world physics, so it may not perfectly represent every force acting on the baseball.</p>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
-<p>This article stood out because it shows how advanced machine learning can become when applied to a real-world sports problem. It also connects directly to baseball analytics, player development, and the future of accessible training technology.</p>
-</div>
-</div>
-</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -160,6 +160,23 @@ div.quarto-about-trestles .about-entity .about-link:hover {
   color: white !important;
 }
 
+.kalman-ascii {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.kalman-ascii pre {
+  display: inline-block;
+  text-align: left;
+  font-size: 1.35rem;
+  line-height: 1.6;
+  padding: 1.5rem 2rem;
+  border-radius: 15px;
+  background-color: #f4f6f8;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
 /* Make cards in grids the same height */
 .grid {
   align-items: stretch;

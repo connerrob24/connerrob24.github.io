@@ -1,6 +1,7 @@
 ---
 title: "Text Analysis Project"
 page-layout: full
+toc: true
 format: html
 ---
 
@@ -13,7 +14,7 @@ href="https://github.com/ADC-405-S26/Project_3_TextAnalysis_Team_7" target="_bla
 This was a joint project done with Will Zatkowski
 :::
 
-## Introduction & Background
+## Introduction
 
 Religious texts have shaped history not only through what they say, but also through how they are written. The four Gospels in the Bible are often read together because they each tell the story of Jesus from four different perspectives. While they overlap in many places, they also differ in structure, emphasis, and wording. These differences make the Gospels a useful case for text analysis, where we can compare not just what each Gospel says, but how each one says it. In this blog post, we will use computational tools to explore whether the Gospels’ language patterns reflect their historical and literary relationships. To be more specific, our primary goal is to identify which words and themes are most distinctive from one Gospel to the next, and understand the linguistic differences tied to the unique writing styles of each author.
 
@@ -163,7 +164,7 @@ knitr::kable(
 
 :::
 
-## Exploring Distinctive Thematic Language in the four Gospels
+## Exploring Distinctive Thematic Language
 
 ```{r}
 #| include: false

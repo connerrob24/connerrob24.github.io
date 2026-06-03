@@ -155,11 +155,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <ul class="dropdown-menu" aria-labelledby="nav-menu-stat-405">    
         <li>
     <a class="dropdown-item" href="./sql_project.html">
- <span class="dropdown-text">SQL Database</span></a>
+ <span class="dropdown-text">SQL Database Creation</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./text_analysis.html">
- <span class="dropdown-text">Text Analysis</span></a>
+ <span class="dropdown-text">Textual Analysis of the Four Gospels</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="./package.html">
@@ -168,6 +168,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./poster.html">
  <span class="dropdown-text">KFYO Poster Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./stylo.html">
+ <span class="dropdown-text">Sylo Package Analysis</span></a>
   </li>  
     </ul>
   </li>
@@ -187,9 +191,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-background" id="toc-introduction-background" class="nav-link active" data-scroll-target="#introduction-background">Introduction &amp; Background</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
   <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#exploring-distinctive-thematic-language-in-the-four-gospels" id="toc-exploring-distinctive-thematic-language-in-the-four-gospels" class="nav-link" data-scroll-target="#exploring-distinctive-thematic-language-in-the-four-gospels">Exploring Distinctive Thematic Language in the four Gospels</a></li>
+  <li><a href="#exploring-distinctive-thematic-language" id="toc-exploring-distinctive-thematic-language" class="nav-link" data-scroll-target="#exploring-distinctive-thematic-language">Exploring Distinctive Thematic Language</a></li>
   </ul>
 </nav>
     </div>
@@ -229,8 +233,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>This was a joint project done with Will Zatkowski</p>
 </div>
 </div>
-<section id="introduction-background" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-background">Introduction &amp; Background</h2>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Religious texts have shaped history not only through what they say, but also through how they are written. The four Gospels in the Bible are often read together because they each tell the story of Jesus from four different perspectives. While they overlap in many places, they also differ in structure, emphasis, and wording. These differences make the Gospels a useful case for text analysis, where we can compare not just what each Gospel says, but how each one says it. In this blog post, we will use computational tools to explore whether the Gospels’ language patterns reflect their historical and literary relationships. To be more specific, our primary goal is to identify which words and themes are most distinctive from one Gospel to the next, and understand the linguistic differences tied to the unique writing styles of each author.</p>
 <p>For a deeper dive into the historical background, check out our <a href="https://drive.google.com/file/d/1N7kFC9q3tKnOqyLSO3LXhZtbjc_K8R5H/view?usp=sharing">PDF document!</a></p>
 </section>
@@ -390,8 +394,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="exploring-distinctive-thematic-language-in-the-four-gospels" class="level2">
-<h2 class="anchored" data-anchor-id="exploring-distinctive-thematic-language-in-the-four-gospels">Exploring Distinctive Thematic Language in the four Gospels</h2>
+<section id="exploring-distinctive-thematic-language" class="level2">
+<h2 class="anchored" data-anchor-id="exploring-distinctive-thematic-language">Exploring Distinctive Thematic Language</h2>
 <p>We first wanted to compare the Gospels through the specific types of language they emphasize. To do so, we split core words and phrases throughout the bible into 6 themes for later sentiment analysis: forgiveness, love, faith, miracles, evil, and death. Focusing on a smaller subset of words forces the analysis to center more directly on the theological and emotional language that shapes each Gospel. However, using sentiment analysis with religious phrases and wording can become quite buggy. Therefore, we had to manually create a ‘lexicon’ that not only categorized the custom set of words into these themes, but also gave a connotation score from -2 to 2: negative values represent darker or conflict-oriented language and positive values represent redemptive or hopeful language.</p>
 <p>Since TF-IDF only shows which words are most distinctive in each Gospel, we combined it with our connotation scores to make the measure more interpretive. In other words, a weighted connotation score was created by multiplying each word’s TF-IDF value by its manually assigned connotation score.</p>
 <div class="cell">
