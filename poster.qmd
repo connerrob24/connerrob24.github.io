@@ -120,7 +120,7 @@ As explained, the ball can be difficult to detect in regular video. The Kalman f
 
 ---
 
-## Limitations
+## Limitations & Future Work
 
 While the system was shown to have relatively strong performance (especially compared to previous models), several important limitations remain that the writers recommend be improved. One primary issue is the data imbalance: the model has more bat examples than ball examples. This is, of course, due to the nature of a baseball movement in the game, making it more difficult for the model to detect relative to the bat. With that, the ball-class recall for the system was 80%, meaning the model missed about 1 in 5 baseballs. They state that this misclassification happened most often when the ball was blurred or surrounded by background clutter.
 

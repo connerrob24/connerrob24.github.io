@@ -275,10 +275,10 @@ detected      detected       missed       predicted
 </div>
 <hr>
 </section>
-<section id="limitations" class="level2">
-<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<section id="limitations-future-work" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-future-work">Limitations &amp; Future Work</h2>
 <p>While the system was shown to have relatively strong performance (especially compared to previous models), several important limitations remain that the writers recommend be improved. One primary issue is the data imbalance: the model has more bat examples than ball examples. This is, of course, due to the nature of a baseball movement in the game, making it more difficult for the model to detect relative to the bat. With that, the ball-class recall for the system was 80%, meaning the model missed about 1 in 5 baseballs. They state that this misclassification happened most often when the ball was blurred or surrounded by background clutter.</p>
-<p>The other primary limitation was that the Kalman filter assumed a mostly constant velocity for the baseball’s motion, whereas in reality, it is affected by a multitude of real-world forces. They essentially somewhat simplified the physicis behind this movement. They state that this may potentially limit long-range trajectory prediction accuracy.Magnus forces, including gravity, drag, spin, and deceleration are a few of the forces that could be added with greater depth and specificty to increase the accuracy of the model’s predictions.</p>
+<p>The other primary limitation was that the Kalman filter assumed a mostly constant velocity for the baseball’s motion, whereas in reality, it is affected by a multitude of real-world forces. They essentially somewhat simplified the physicis behind this movement. They state that this may potentially limit long-range trajectory prediction accuracy.Magnus forces, including gravity, drag, spin, and deceleration are a few of the forces that could be added with greater depth and specificty to increase the accuracy of the model’s trajectory predictions.</p>
 <p>Lastly, there were internal camera assumptions that somewhat limited videos would and wouldn’t be accurate. The speed estimates relied on a standard 18.4 m pitcher-to-catcher distance and a mostly frontal camera angle, which may not hold in amateur videos.</p>
 
 
