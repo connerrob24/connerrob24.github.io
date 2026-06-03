@@ -26,8 +26,8 @@ website:
             text: Webgem Package 
           - href: poster.qmd
             text: KFYO Poster Project
-          - href: Sylo Package Analysis
-            text: stylo.qmd
+          - href: stylo.qmd
+            text: Sylo Package Analysis
 
 format:
   html:

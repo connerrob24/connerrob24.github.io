@@ -29,11 +29,10 @@ page-layout: full
 
 ::: {.project-card}
 ### Shiny App Project
+
 Major League Baseball pitching percentile rankings analysis.
 
-<i class="bi bi-box-arrow-up-right"></i> <a
-href="https://jxajm8-conner-robertson.shinyapps.io/project/" target="_blank">Learn More</a>
-
+<i class="bi bi-window"></i> [View App](shiny-app.qmd)
 :::
 
 ::: {.project-card .static-card}

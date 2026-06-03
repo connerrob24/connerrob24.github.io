@@ -18,7 +18,7 @@ This was a joint project worked on with Brett Hartlaub
 
 For this SQL project, we built a small MLB team-statistics database using three datasets pulled from FanGraphs: team batting, team pitching, and team fielding. Using the `baseballr` package in R, we created a vector of seasons and looped through each year to collect team-level statistics from 2015 through 2024, excluding the shortened 2020 season. Each dataset was cleaned by removing unnecessary columns, renaming variables, and saving the final versions as CSV files before loading them into a DuckDB database. This gave us three connected tables that could be queried with SQL to compare offensive production, pitching performance, and defensive value across MLB teams and seasons.
 
-``` sql
+``` r
 years <- c(2024, 2023, 2022, 2021, 2019, 2018, 2017, 2016, 2015)
 
 - example of looping for the team_pitching data
@@ -49,8 +49,9 @@ team_batting_all <- team_batting_all_unfiltered |>  select(-c(3:7, 19:21, 23, 27
     hard_pct_plus = `Hard_pct+`)
 ```
 
-```r
+```{r}
 #| include: false
+
 
 library(baseballr)
 library(purrr)
@@ -81,7 +82,7 @@ team_batting_all <- team_batting_all_unfiltered |>  select(-c(3:7, 19:21, 23, 27
 **Sample Table**
 :::
 
-```r
+```{r}
 #| echo: false
 
 knitr::kable(head(team_batting_all))

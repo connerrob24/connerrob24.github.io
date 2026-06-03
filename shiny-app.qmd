@@ -1,0 +1,12 @@
+---
+title: ""
+page-layout: full
+---
+
+
+::: {.shiny-page-embed}
+<iframe 
+  src="https://jxajm8-conner-robertson.shinyapps.io/project/"
+  title="MLB Pitching Percentile Rankings Shiny App">
+</iframe>
+:::

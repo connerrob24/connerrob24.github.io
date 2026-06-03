@@ -180,6 +180,20 @@ div.quarto-about-trestles .about-entity .about-link:hover {
   line-height: 1.7;
 }
 
+.shiny-page-embed {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.shiny-page-embed iframe {
+  width: 100%;
+  height: 1000px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  background-color: white;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
 /* Existing image style */
 .profile-pic {
   display: block;
@@ -209,7 +223,7 @@ div.quarto-about-trestles .about-entity .about-link:hover {
 .profile-photo {
   display: block;
   width: 100%;
-  max-width: 500px;
+  max-width: 475px;
   margin: 40px auto 25px auto;
   border: 1px solid rgba(135, 43, 73, 0.35);
   border-radius: 18px;

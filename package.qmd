@@ -62,7 +62,7 @@ library(webgem)
 ```
 
 
-## hitterRadar examples
+## `hitterProfile` & `hitterRadar` Pipeline Examples
 
 **code portion**
 

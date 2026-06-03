@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Conner Robertson</title>
+<title>Package Presentation: stylo – Conner Robertson</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -91,7 +91,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
@@ -151,46 +151,88 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#preparing-the-texts" id="toc-preparing-the-texts" class="nav-link active" data-scroll-target="#preparing-the-texts">Preparing the Texts</a></li>
+  <li><a href="#running-stylo" id="toc-running-stylo" class="nav-link" data-scroll-target="#running-stylo">Running <code>stylo()</code></a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content column-page-left" id="quarto-document-content">
 
-
-
-
-<section id="home-name" class="level1 top-hero">
-<h1>Conner Robertson</h1>
-<p><img src="images/IMG_3170.jpeg" class="profile-photo img-fluid"></p>
-<div class="button-row">
-<p><a href="mailto:robertco@lawrence.edu" class="home-btn">Email</a> <a href="https://github.com/connerrob24/" class="home-btn" target="_blank">GitHub</a> <a href="https://www.linkedin.com/in/conner-robertson-3297532b8/" class="home-btn" target="_blank">LinkedIn</a></p>
-</div>
-</section>
-<section id="section" class="level2">
-<h2 class="anchored" data-anchor-id="section"></h2>
-<div class="project-grid">
-<section id="resume" class="level3 project-card">
-<h3 class="anchored" data-anchor-id="resume">Resume</h3>
-<p><i class="bi bi-file-earmark"></i> View my <a href="https://drive.google.com/file/d/1v8BbmGckoAS4CYBgHNIV4Q_UR9RSjBW_/view?usp=sharing" target="_blank">Resume</a></p>
-</section>
-<section id="shiny-app-project" class="level3 project-card">
-<h3 class="anchored" data-anchor-id="shiny-app-project">Shiny App Project</h3>
-<p>Major League Baseball pitching percentile rankings analysis.</p>
-<p><i class="bi bi-window"></i> <a href="./shiny-app.html">View App</a></p>
-</section>
-<section id="my-photography-portfolio" class="level3 project-card static-card">
-<h3 class="anchored" data-anchor-id="my-photography-portfolio">My Photography Portfolio</h3>
-<p>A small collection of moments I have captured.</p>
-<p><i class="bi bi-camera"></i> <a href="./photography.html" target="_blank">View</a></p>
-</section>
-<section id="background" class="level3 project-card">
-<h3 class="anchored" data-anchor-id="background">Background</h3>
-<p>Learn more about my interests and professional goals.</p>
-<p><i class="bi bi-box-arrow-up-right"></i> <a href="./about.html" target="_blank">About Me</a></p>
-</section>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Package Presentation: <code>stylo</code></h1>
 </div>
 
 
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><i class="bi bi-box-arrow-up-right"></i> <a href="http://rpubs.com/connerrob24/1431864">View RPubs Presentation</a></p>
+<div class="presentation-intro">
+<p>This page highlights my package presentation on <code>stylo</code>, an R package used for computational text analysis and stylometry. The presentation walks through what <code>stylo</code> does, how text data must be prepared, and how the final cluster analysis can be interpreted. Primarily, stylo is exceedingly useful in the study of quantitatively comparing the authorial writing styles between authorship. In this example, the four Gospels were used to analyze the linguistic differences between the authors Matthew, Mark, John, and Luke.</p>
+</div>
+<hr>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">What is <code>stylo</code>?</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href=""><code>stylo</code> arguments</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p><img src="images/stylo_intro.png" class="img-fluid"></p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><img src="images/stylo_arguments.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<section id="preparing-the-texts" class="level3 slide-text">
+<h3 class="anchored" data-anchor-id="preparing-the-texts">Preparing the Texts</h3>
+<p>Before running the analysis, the Gospel texts need to be cleaned and combined so that each Gospel becomes one complete document. This step prepares the data for comparison. The cleaned texts then need to be saved into a <code>corpus</code> foler. This allows the <code>stylo()</code> function to read text files from the corpus directory when running the final analysis.</p>
 </section>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">Prepping Gospel Texts</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">Creating Corpus Folder</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p><img src="images/stylo_prep.png" class="img-fluid"></p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p><img src="images/stylo_corpus.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+<section id="running-stylo" class="level3 slide-text">
+<h3 class="anchored" data-anchor-id="running-stylo">Running <code>stylo()</code></h3>
+<p><em>Next, inputting the criteria for each argument in this example</em></p>
+</section>
+<div class="slide-showcase">
+<div class="slide-image">
+<p><img src="images/stylo_run.png" class="img-fluid"></p>
+</div>
+<section id="step-5-final-cluster-analysis" class="level3 slide-text">
+<h3 class="anchored" data-anchor-id="step-5-final-cluster-analysis">Step 5: Final Cluster Analysis</h3>
+<hr>
+<p>The visualization below is a cluster analysis plot, which works like a family tree of textual similarity. Texts that connect on shorter branches are more similar to one another, while texts that connect farther away are more distant in text patterning. To be more specific, the x-axis shows relative Euclidean distances, which represent stylistic similarity (lower values indicate greater similarity; higher values indicate greater dissimilarity).</p>
+<p>For a deeper analysis, view our <a href="https://drive.google.com/file/d/1N7kFC9q3tKnOqyLSO3LXhZtbjc_K8R5H/view?usp=sharing">full workflow</a></p>
+<hr>
+<p><img src="images/stylo_cluster.png" class="img-fluid"></p>
+</section>
+</div>
+
+
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

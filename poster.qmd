@@ -6,6 +6,7 @@ page-layout: full
 
 ::: {.callout-note}
 This was a joint project worked on with Nick Katz.
+
 :::
 
 ::: {.poster-hero}
@@ -49,9 +50,9 @@ Professional baseball tracking systems are powerful, but they are often expensiv
 
 ::: {.g-col-4}
 ::: {.card}
-### Core Method
+### Data 
 
-The researchers use a YOLO-based object detection model to identify baseballs and bats in video frames, then use tracking methods to estimate the ball’s movement.
+The data used included baseball videos collected from several sources, including professional highlights, amateur games, and self-recorded training footage. They then converted these videos into still frames so the model could learn from individual images.
 :::
 :::
 
