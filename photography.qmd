@@ -21,7 +21,8 @@ page-layout: full
   <div class="photo-item wide"><img src="images/IMG_2703.jpeg" onclick="openLightbox(this.src)"></div>
   <div class="photo-item tall"><img src="images/IMG_2886.jpeg" onclick="openLightbox(this.src)"></div>
   <div class="photo-item wide"><img src="images/IMG_7651.JPG" onclick="openLightbox(this.src)"></div>
-
+  <div class="photo-item full"><img src="images/IMG_8164.jpeg" onclick="openLightbox(this.src)"></div>
+  
 </div>
 
 <div id="image-lightbox" onclick="closeLightbox()">

@@ -483,6 +483,11 @@ div.quarto-about-trestles .about-entity .about-link:hover {
   grid-column: span 2;
 }
 
+.photo-item.full {
+  grid-column: 1 / -1;
+  grid-row: span 1;
+}
+
 /* Custom layout tweaks */
 .photo-item:nth-child(1) {
   grid-column: span 2;
