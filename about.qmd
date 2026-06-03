@@ -1,7 +1,16 @@
 ---
 title: "About Me"
 toc: false
+page-layout: full
 ---
+
+::: {layout-ncol=2 layout-valign="bottom"}
+
+![](images/IMG_9159.JPG){style="width: 100%; height: 400px; object-fit: cover; border-radius: 15px;"}
+
+![](images/IMG_7592.JPG){style="width: 100%; height: 400px; object-fit: cover; border-radius: 15px;"}
+
+:::
 
 Hello, I’m Conner Robertson — a student-athlete and aspiring business professional with interests in baseball, analytics, entrepreneurship, and technology.
 
@@ -19,14 +28,3 @@ This website highlights my background, projects, and experience. I am especially
 I value teamwork, discipline, and continuous improvement. My experiences in athletics and academics have shaped the way I approach leadership, preparation, and long-term growth.
 
 
-
-*
-
-
-:::{layout-ncol=2}
-![](images/IMG_9159.JPG){.profile-pic}
-
-
-
-![](images/IMG_7592.JPG){.profile-pic}
-:::

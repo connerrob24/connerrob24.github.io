@@ -5,8 +5,8 @@ page-layout: full
 ---
 
 <div class="photo-intro">
-  <h1>My Photography Portfolio</h1>
-  <p>nature, friends, and memories</p>
+  <h1>Photography Portfolio</h1>
+  <p>💐nature, friends, and memories💐</p>
 </div>
 
 <div class="photo-mosaic">

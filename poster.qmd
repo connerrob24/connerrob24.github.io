@@ -1,5 +1,94 @@
 ---
-title: "poster"
+title: "KFYO Poster Analysis"
 format: html
+page-layout: full
 ---
 
+::: {.callout-note}
+This was a joint project worked on with Nick Katz.
+:::
+
+::: {.poster-hero}
+
+[View Poster](http://rpubs.com/nickkatz625/1437798){.btn .btn-primary}
+:::
+
+::: {.grid .article-top}
+
+::: {.g-col-4}
+::: {.article-title-box}
+### Article Reviewed
+
+**KFYO: Fusing vision and biomechanics for accurate pitch evaluation in real-time baseball using deep learning techniques**
+:::
+:::
+
+::: {.g-col-8}
+::: {.research-hero}
+### Making Baseball Tracking More Accessible
+
+This article explores how machine learning can be used to detect and track baseballs from video. Instead of relying only on expensive professional tracking systems, the researchers investigate whether computer vision models can help make pitch tracking more affordable and available to more players and coaches.
+:::
+:::
+
+:::
+
+---
+
+## Article Snapshot
+
+::: {.grid}
+
+::: {.g-col-4}
+::: {.card}
+### Main Problem
+
+Professional baseball tracking systems are powerful, but they are often expensive and difficult for amateur athletes, coaches, and smaller programs to access.
+:::
+:::
+
+::: {.g-col-4}
+::: {.card}
+### Core Method
+
+The researchers use a YOLO-based object detection model to identify baseballs and bats in video frames, then use tracking methods to estimate the ball’s movement.
+:::
+:::
+
+::: {.g-col-4}
+::: {.card}
+### Big Idea
+
+The goal is to create a lower-cost way to analyze pitch speed, trajectory, and movement from more accessible video sources.
+:::
+:::
+
+:::
+
+## Review Breakdown
+
+::: {.panel-tabset}
+
+### Problem & Objective
+
+The article focuses on the accessibility gap in baseball performance technology. Major League Baseball and professional organizations have access to advanced systems that track pitch movement, spin, speed, and trajectory, but many amateur players and smaller programs do not.
+
+The main objective is to explore whether machine learning can help analyze baseball video in a more affordable and scalable way.
+
+### Methodology
+
+The researchers use YOLOv12, an object detection model, to identify baseballs and bats in individual video frames. After detection, a Kalman filter helps predict the ball’s movement across frames when the ball is blurred, moving quickly, or temporarily difficult to detect.
+
+The study also connects the tracking process to aerodynamic ideas such as gravity, drag, and Magnus force.
+
+### Limitations
+
+One important limitation is that baseballs are small, fast, and often blurred on camera, which makes detection difficult. The model also had more examples of bats than baseballs, creating an imbalance in the training data.
+
+Another limitation is that the tracking process simplifies some real-world physics, so it may not perfectly represent every force acting on the baseball.
+
+### Reflection
+
+This article stood out because it shows how advanced machine learning can become when applied to a real-world sports problem. It also connects directly to baseball analytics, player development, and the future of accessible training technology.
+
+:::

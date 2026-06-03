@@ -149,7 +149,7 @@ SELECT
 
 ---
 
-### qVisualization
+### Visualization
 
 The plot below orders teams by ERA, with better run prevention on the left and worse run prevention on the right. Each team is colored by a defensive tier created from its 2024 OAA and DRS values. Overall, the visualization suggests that defense may relate to ERA, since poor defensive teams generally appear more often in the mid-to-high ERA range. However, the colors are still mixed across the plot, and even strong or mediocre defensive teams cover a wide range of ERAs. This shows that defense matters, but ERA is also shaped by other factors like pitching talent, strikeouts, walks, and home runs allowed.
 

@@ -1,9 +1,7 @@
 ---
-title: "package"
+title: "`webgem` Package"
 format: html
 ---
-
-## Summary of `webgem` Package
 
 ::: {.package-hero}
 
@@ -11,6 +9,8 @@ format: html
 
 *For deeper explanation and examples, visit the github repository* [{{< fa brands github >}}](https://github.com/ADC-405-S26/webgem)
 :::
+
+---
 
 ### Installation
 

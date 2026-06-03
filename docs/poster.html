@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Text Analysis Project – Conner Robertson</title>
+<title>KFYO Poster Analysis – Conner Robertson</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,41 +19,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -187,9 +152,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction-background" id="toc-introduction-background" class="nav-link active" data-scroll-target="#introduction-background">Introduction &amp; Background</a></li>
-  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
-  <li><a href="#exploring-distinctive-thematic-language-in-the-four-gospels" id="toc-exploring-distinctive-thematic-language-in-the-four-gospels" class="nav-link" data-scroll-target="#exploring-distinctive-thematic-language-in-the-four-gospels">Exploring Distinctive Thematic Language in the four Gospels</a></li>
+  <li><a href="#article-snapshot" id="toc-article-snapshot" class="nav-link active" data-scroll-target="#article-snapshot">Article Snapshot</a></li>
+  <li><a href="#review-breakdown" id="toc-review-breakdown" class="nav-link" data-scroll-target="#review-breakdown">Review Breakdown</a></li>
   </ul>
 </nav>
     </div>
@@ -198,7 +162,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Text Analysis Project</h1>
+<h1 class="title">KFYO Poster Analysis</h1>
 </div>
 
 
@@ -215,305 +179,82 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><i class="bi bi-github"></i> <a href="https://github.com/ADC-405-S26/Project_3_TextAnalysis_Team_7" target="_blank">GitHub Repo</a></p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>NOTE:
+Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>This was a joint project done with Will Zatkowski</p>
+<p>This was a joint project worked on with Nick Katz.</p>
 </div>
 </div>
-<section id="introduction-background" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-background">Introduction &amp; Background</h2>
-<p>Religious texts have shaped history not only through what they say, but also through how they are written. The four Gospels in the Bible are often read together because they each tell the story of Jesus from four different perspectives. While they overlap in many places, they also differ in structure, emphasis, and wording. These differences make the Gospels a useful case for text analysis, where we can compare not just what each Gospel says, but how each one says it. In this blog post, we will use computational tools to explore whether the Gospels’ language patterns reflect their historical and literary relationships. To be more specific, our primary goal is to identify which words and themes are most distinctive from one Gospel to the next, and understand the linguistic differences tied to the unique writing styles of each author.</p>
-<p>For a deeper dive into the historical background, check out our <a href="https://drive.google.com/file/d/1N7kFC9q3tKnOqyLSO3LXhZtbjc_K8R5H/view?usp=sharing">PDF document!</a></p>
+<div class="poster-hero">
+<p><a href="http://rpubs.com/nickkatz625/1437798" class="btn btn-primary">View Poster</a></p>
+</div>
+<div class="grid article-top">
+<div class="g-col-4">
+<section id="article-reviewed" class="level3 article-title-box">
+<h3 class="anchored" data-anchor-id="article-reviewed">Article Reviewed</h3>
+<p><strong>KFYO: Fusing vision and biomechanics for accurate pitch evaluation in real-time baseball using deep learning techniques</strong></p>
 </section>
-<section id="data" class="level2">
-<h2 class="anchored" data-anchor-id="data">Data</h2>
-<p>The data used in this project contains the King James version of the four Gospels: Matthew, Mark, Luke, and John, from Gutenberg metadata. Each observation represents a portion of Gospel text, organized by Gospel and verse-level information. The raw version of our initial dataset includes the Gutenberg-assigned ID for each gospel, the free-form text, the title, and the Gospel name.</p>
+</div>
+<div class="g-col-8">
+<section id="making-baseball-tracking-more-accessible" class="level3 research-hero">
+<h3 class="anchored" data-anchor-id="making-baseball-tracking-more-accessible">Making Baseball Tracking More Accessible</h3>
+<p>This article explores how machine learning can be used to detect and track baseballs from video. Instead of relying only on expensive professional tracking systems, the researchers investigate whether computer vision models can help make pitch tracking more affordable and available to more players and coaches.</p>
+</section>
+</div>
+</div>
+<hr>
+<section id="article-snapshot" class="level2">
+<h2 class="anchored" data-anchor-id="article-snapshot">Article Snapshot</h2>
+<div class="grid">
+<div class="g-col-4">
+<section id="main-problem" class="level3 card">
+<h3 class="anchored" data-anchor-id="main-problem">Main Problem</h3>
+<p>Professional baseball tracking systems are powerful, but they are often expensive and difficult for amateur athletes, coaches, and smaller programs to access.</p>
+</section>
+</div>
+<div class="g-col-4">
+<section id="core-method" class="level3 card">
+<h3 class="anchored" data-anchor-id="core-method">Core Method</h3>
+<p>The researchers use a YOLO-based object detection model to identify baseballs and bats in video frames, then use tracking methods to estimate the ball’s movement.</p>
+</section>
+</div>
+<div class="g-col-4">
+<section id="big-idea" class="level3 card">
+<h3 class="anchored" data-anchor-id="big-idea">Big Idea</h3>
+<p>The goal is to create a lower-cost way to analyze pitch speed, trajectory, and movement from more accessible video sources.</p>
+</section>
+</div>
+</div>
+</section>
+<section id="review-breakdown" class="level2">
+<h2 class="anchored" data-anchor-id="review-breakdown">Review Breakdown</h2>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Uncleaned Data</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Cleaning Process</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Cleaned Data</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Problem &amp; Objective</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Methodology</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false" href="">Limitations</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false" href="">Reflection</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>First few rows of the uncleaned Gospel text data</caption>
-<colgroup>
-<col style="width: 9%">
-<col style="width: 51%">
-<col style="width: 33%">
-<col style="width: 5%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">gutenberg_id</th>
-<th style="text-align: left;">text</th>
-<th style="text-align: left;">title</th>
-<th style="text-align: left;">gospel</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">Book 40 Matthew</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">40:001:001 The book of the generation of Jesus Christ, the son of David,</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">the son of Abraham.</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;"></td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">40:001:002 Abraham begat Isaac; and Isaac begat Jacob; and Jacob begat</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
+<p>The article focuses on the accessibility gap in baseball performance technology. Major League Baseball and professional organizations have access to advanced systems that track pitch movement, spin, speed, and trajectory, but many amateur players and smaller programs do not.</p>
+<p>The main objective is to explore whether machine learning can help analyze baseball video in a more affordable and scalable way.</p>
 </div>
 <div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>gospels_clean <span class="ot">&lt;-</span> gospels_raw <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(text <span class="sc">!=</span> <span class="st">""</span>) <span class="sc">|&gt;</span>   <span class="co"># removing any rows where the text is now blank.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># removing lines that begin with "book" followed by a space.</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># str_detect() checks whether a text pattern is present.</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">str_detect</span>(text, <span class="fu">regex</span>(<span class="st">"^book</span><span class="sc">\\</span><span class="st">s+"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="co"># str_replace_all() replaces every match of a pattern.</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="co"># \\d+ - "one or more digits."</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># this removes chapter numbers, verse numbers, or labels</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">str_replace_all</span>(text, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>, <span class="st">" "</span>),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="co"># removing leftover colons from the beginning of the line</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="co"># \\s* - "zero or more spaces"</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="co"># : - "match a colon"</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co"># :? - "optionally matches one more colon"</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># the "" at the end deletes the matched punctuation</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">str_replace</span>(text, <span class="st">"^</span><span class="sc">\\</span><span class="st">s*:</span><span class="sc">\\</span><span class="st">s*:?</span><span class="sc">\\</span><span class="st">s*"</span>, <span class="st">""</span>), </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="at">text =</span> <span class="fu">str_squish</span>(text) <span class="co"># str_squish() removes extra spaces from each line of text.</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p>The researchers use YOLOv12, an object detection model, to identify baseballs and bats in individual video frames. After detection, a Kalman filter helps predict the ball’s movement across frames when the ball is blurred, moving quickly, or temporarily difficult to detect.</p>
+<p>The study also connects the tracking process to aerodynamic ideas such as gravity, drag, and Magnus force.</p>
 </div>
 <div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>First few rows of the cleaned Gospel text data</caption>
-<colgroup>
-<col style="width: 9%">
-<col style="width: 47%">
-<col style="width: 36%">
-<col style="width: 6%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: right;">gutenberg_id</th>
-<th style="text-align: left;">text</th>
-<th style="text-align: left;">title</th>
-<th style="text-align: left;">gospel</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">The book of the generation of Jesus Christ, the son of David,</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">the son of Abraham.</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">Abraham begat Isaac; and Isaac begat Jacob; and Jacob begat</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">Judas and his brethren;</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">And Judas begat Phares and Zara of Thamar; and Phares begat</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">8040</td>
-<td style="text-align: left;">Esrom; and Esrom begat Aram;</td>
-<td style="text-align: left;">The Bible, King James version, Book 40: Matthew</td>
-<td style="text-align: left;">Matthew</td>
-</tr>
-</tbody>
-</table>
+<p>One important limitation is that baseballs are small, fast, and often blurred on camera, which makes detection difficult. The model also had more examples of bats than baseballs, creating an imbalance in the training data.</p>
+<p>Another limitation is that the tracking process simplifies some real-world physics, so it may not perfectly represent every force acting on the baseball.</p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p>This article stood out because it shows how advanced machine learning can become when applied to a real-world sports problem. It also connects directly to baseball analytics, player development, and the future of accessible training technology.</p>
 </div>
 </div>
 </div>
-</div>
-</div>
-</section>
-<section id="exploring-distinctive-thematic-language-in-the-four-gospels" class="level2">
-<h2 class="anchored" data-anchor-id="exploring-distinctive-thematic-language-in-the-four-gospels">Exploring Distinctive Thematic Language in the four Gospels</h2>
-<p>We first wanted to compare the Gospels through the specific types of language they emphasize. To do so, we split core words and phrases throughout the bible into 6 themes for later sentiment analysis: forgiveness, love, faith, miracles, evil, and death. Focusing on a smaller subset of words forces the analysis to center more directly on the theological and emotional language that shapes each Gospel. However, using sentiment analysis with religious phrases and wording can become quite buggy. Therefore, we had to manually create a ‘lexicon’ that not only categorized the custom set of words into these themes, but also gave a connotation score from -2 to 2: negative values represent darker or conflict-oriented language and positive values represent redemptive or hopeful language.</p>
-<p>Since TF-IDF only shows which words are most distinctive in each Gospel, we combined it with our connotation scores to make the measure more interpretive. In other words, a weighted connotation score was created by multiplying each word’s TF-IDF value by its manually assigned connotation score.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<caption>Sample of focus words after converting TF-IDF output into tidy format</caption>
-<colgroup>
-<col style="width: 11%">
-<col style="width: 14%">
-<col style="width: 13%">
-<col style="width: 17%">
-<col style="width: 10%">
-<col style="width: 32%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Gospel</th>
-<th style="text-align: left;">Word</th>
-<th style="text-align: left;">Theme</th>
-<th style="text-align: right;">Connotation</th>
-<th style="text-align: right;">TF-IDF</th>
-<th style="text-align: right;">Weighted contribution</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">John</td>
-<td style="text-align: left;">miracles</td>
-<td style="text-align: left;">miracles</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0.0067</td>
-<td style="text-align: right;">0.0134</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">John</td>
-<td style="text-align: left;">believeth</td>
-<td style="text-align: left;">faith</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0.0063</td>
-<td style="text-align: right;">0.0126</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">John</td>
-<td style="text-align: left;">sin</td>
-<td style="text-align: left;">evil</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">0.0059</td>
-<td style="text-align: right;">-0.0119</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Luke</td>
-<td style="text-align: left;">devils</td>
-<td style="text-align: left;">evil</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">0.0038</td>
-<td style="text-align: right;">-0.0076</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Mark</td>
-<td style="text-align: left;">devils</td>
-<td style="text-align: left;">evil</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">0.0036</td>
-<td style="text-align: right;">-0.0073</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">John</td>
-<td style="text-align: left;">loved</td>
-<td style="text-align: left;">love</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0.0034</td>
-<td style="text-align: right;">0.0068</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Luke</td>
-<td style="text-align: left;">sinner</td>
-<td style="text-align: left;">evil</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">0.0032</td>
-<td style="text-align: right;">-0.0065</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Mark</td>
-<td style="text-align: left;">unclean</td>
-<td style="text-align: left;">evil</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">0.0030</td>
-<td style="text-align: right;">-0.0061</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">Luke</td>
-<td style="text-align: left;">faith</td>
-<td style="text-align: left;">faith</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">0.0027</td>
-<td style="text-align: right;">0.0054</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Matthew</td>
-<td style="text-align: left;">devils</td>
-<td style="text-align: left;">evil</td>
-<td style="text-align: right;">-2</td>
-<td style="text-align: right;">0.0025</td>
-<td style="text-align: right;">-0.0051</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<p>Now we visualized these scores using a heatmap, with the x-axis comparing Matthew, Mark, Luke, and John, and the y-axis listing the six themes. Each tile represents one Gospel-theme combination, with the color and number showing whether that theme is more positively or negatively weighted in that Gospel. Strong positive values indicate that a theme is being shaped by words that are both distinctive to that Gospel and positively coded. Strong negative values indicate that a theme is being shaped by words that are both distinctive to that Gospel and negatively coded. These values are the normalized theme scores multiplied by 1000, which was done only to make the very small TF-IDF-based values easier to read on the plot.</p>
-<hr>
-<div class="cell" data-layout-align="center">
-<div class="cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="text_analysis_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="864"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>Luke, Mark, and Matthew all demonstrate strong similarities in the forgiveness, miracles, and faith themes. Forgiveness appears to be heavily significant across these three Gospels, with Luke having the highest weighted connotation score at 2.3, followed by Mark at 1.8 and Matthew at 1.7. In contrast, the textual data in John results in a value of 0…</p>
-<p>Check out <a href="https://drive.google.com/file/d/1N7kFC9q3tKnOqyLSO3LXhZtbjc_K8R5H/view?usp=sharing">our pdf</a> for the full analyis.</p>
 
 
 </section>

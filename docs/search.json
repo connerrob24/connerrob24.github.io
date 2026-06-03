@@ -18,7 +18,7 @@
     "href": "sql_project.html#primary-query",
     "title": "SQL Project",
     "section": "Primary Query",
-    "text": "Primary Query\nThe main goal was to see whether teams with stronger defensive performance also tended to have lower ERAs. To do this, we worked with team-level pitching and fielding data, joining the tables so that each row represented one team with its ERA, OAA, and DRS values. ERA was used as the main measure of run prevention, while OAA and DRS were used to evaluate defensive quality. After combining the data, we created defensive tiers to group teams into Excellent, Mediocre, and Poor Defense, which allowed us to compare overall defensive performance against team ERA in a clearer way.\n\nFirst joining the team_pitching and team_fielding data frames \nKeeping only rows in 2024 season and removing NA’s\n\nWITH joined_data AS (\n    SELECT\n        p.Season,       \n        p.team_name,    \n        p.ERA,          \n        f.OAA,          -- Outs Above Average\n        f.DRS           -- Defensive Runs Saved\n    FROM team_pitching AS p\n    JOIN team_fielding AS f\n        ON p.Season = f.Season\n       AND p.team_name = f.team_name\n    WHERE p.Season = 2024\n    AND f.OAA IS NOT NULL),\n\nNow I am classifying each team into a defensive tier using OAA and DRS.\n\nOAA - A statcast defensive metric measuring how many outs a fielder saves, incorporating range and play difficulty\nDRS - A statistic that measures how many runs a player saves or costs their team compared to an average fielder\n\nThe CASE statement works like an if/else structure: teams with strong values in both metrics are labeled Excellent Defense, teams with weak values in both are labeled Poor Defense, and all others are labeled Mediocre Defense.\nThe new defense_tier variable is then used to color the ERA plot and compare defensive performance with run prevention.\n\nSELECT\n        Season,\n        team_name,\n        ERA,\n        OAA,\n        DRS,\n        CASE\n        \n            WHEN\n                (CASE WHEN OAA &gt;= 25 THEN 1 ELSE 0 END) +\n                (CASE WHEN DRS &gt;= 5 THEN 1 ELSE 0 END) = 2\n            THEN 'Excellent Defense'\n\n            WHEN\n                (CASE WHEN OAA &lt;= 0 THEN 1 ELSE 0 END) +\n                (CASE WHEN DRS &lt;= 0 THEN 1 ELSE 0 END) = 2\n            THEN 'Poor Defense'\n\n            ELSE 'Mediocre Defense'\n\n        END AS defense_tier\n\n    FROM joined_data)\n\n\nqVisualization\nThe plot below orders teams by ERA, with better run prevention on the left and worse run prevention on the right. Each team is colored by a defensive tier created from its 2024 OAA and DRS values. Overall, the visualization suggests that defense may relate to ERA, since poor defensive teams generally appear more often in the mid-to-high ERA range. However, the colors are still mixed across the plot, and even strong or mediocre defensive teams cover a wide range of ERAs. This shows that defense matters, but ERA is also shaped by other factors like pitching talent, strikeouts, walks, and home runs allowed."
+    "text": "Primary Query\nThe main goal was to see whether teams with stronger defensive performance also tended to have lower ERAs. To do this, we worked with team-level pitching and fielding data, joining the tables so that each row represented one team with its ERA, OAA, and DRS values. ERA was used as the main measure of run prevention, while OAA and DRS were used to evaluate defensive quality. After combining the data, we created defensive tiers to group teams into Excellent, Mediocre, and Poor Defense, which allowed us to compare overall defensive performance against team ERA in a clearer way.\n\nFirst joining the team_pitching and team_fielding data frames \nKeeping only rows in 2024 season and removing NA’s\n\nWITH joined_data AS (\n    SELECT\n        p.Season,       \n        p.team_name,    \n        p.ERA,          \n        f.OAA,          -- Outs Above Average\n        f.DRS           -- Defensive Runs Saved\n    FROM team_pitching AS p\n    JOIN team_fielding AS f\n        ON p.Season = f.Season\n       AND p.team_name = f.team_name\n    WHERE p.Season = 2024\n    AND f.OAA IS NOT NULL),\n\nNow I am classifying each team into a defensive tier using OAA and DRS.\n\nOAA - A statcast defensive metric measuring how many outs a fielder saves, incorporating range and play difficulty\nDRS - A statistic that measures how many runs a player saves or costs their team compared to an average fielder\n\nThe CASE statement works like an if/else structure: teams with strong values in both metrics are labeled Excellent Defense, teams with weak values in both are labeled Poor Defense, and all others are labeled Mediocre Defense.\nThe new defense_tier variable is then used to color the ERA plot and compare defensive performance with run prevention.\n\nSELECT\n        Season,\n        team_name,\n        ERA,\n        OAA,\n        DRS,\n        CASE\n        \n            WHEN\n                (CASE WHEN OAA &gt;= 25 THEN 1 ELSE 0 END) +\n                (CASE WHEN DRS &gt;= 5 THEN 1 ELSE 0 END) = 2\n            THEN 'Excellent Defense'\n\n            WHEN\n                (CASE WHEN OAA &lt;= 0 THEN 1 ELSE 0 END) +\n                (CASE WHEN DRS &lt;= 0 THEN 1 ELSE 0 END) = 2\n            THEN 'Poor Defense'\n\n            ELSE 'Mediocre Defense'\n\n        END AS defense_tier\n\n    FROM joined_data)\n\n\nVisualization\nThe plot below orders teams by ERA, with better run prevention on the left and worse run prevention on the right. Each team is colored by a defensive tier created from its 2024 OAA and DRS values. Overall, the visualization suggests that defense may relate to ERA, since poor defensive teams generally appear more often in the mid-to-high ERA range. However, the colors are still mixed across the plot, and even strong or mediocre defensive teams cover a wide range of ERAs. This shows that defense matters, but ERA is also shaped by other factors like pitching talent, strikeouts, walks, and home runs allowed."
   },
   {
     "objectID": "tr_project.html",
@@ -114,9 +114,9 @@
   {
     "objectID": "photography.html",
     "href": "photography.html",
-    "title": "\nMy Photography Portfolio\n",
+    "title": "\nPhotography Portfolio\n",
     "section": "",
-    "text": "nature, friends, and memories"
+    "text": "💐nature, friends, and memories💐"
   },
   {
     "objectID": "text_analysis.html#data",
@@ -149,9 +149,9 @@
   {
     "objectID": "package.html",
     "href": "package.html",
-    "title": "package",
+    "title": "Conner Robertson",
     "section": "",
-    "text": "webgem is an R package designed to help users summarize and visualize baseball performance data. The package includes functions for ranking player metrics, creating hitter profiles, and building radar-style visualizations that make player strengths and weaknesses easier to compare and understand.\nFor deeper explanation and examples, visit the github repository \n\n\n\nYou can install the development version of webgem from GitHub with:\n# install.packages(\"remotes\")\n# install.packages(\"devtools\")\ndevtools::install_github(\"ADC-405-S26/webgem\")\nlibrary(webgem)"
+    "text": "webgem is an R package designed to help users summarize and visualize baseball performance data. The package includes functions for ranking player metrics, creating hitter profiles, and building radar-style visualizations that make player strengths and weaknesses easier to compare and understand.\nFor deeper explanation and examples, visit the github repository \n\n\n\n\nYou can install the development version of webgem from GitHub with:\n# install.packages(\"remotes\")\n# install.packages(\"devtools\")\ndevtools::install_github(\"ADC-405-S26/webgem\")\nlibrary(webgem)"
   },
   {
     "objectID": "package.html#about-the-package",
@@ -191,21 +191,21 @@
   {
     "objectID": "package.html#primary-functions",
     "href": "package.html#primary-functions",
-    "title": "package",
+    "title": "Conner Robertson",
     "section": "Primary Functions",
     "text": "Primary Functions\n\n\n\nmetricRank()\nRanks players based on selected performance metrics. This function helps compare athletes and identify which players stand out in specific areas.\n\n\n\n\nhitterProfile()\nCreates a hitter summary profile that organizes important offensive information into a clean, readable format.\n\n\n\n\nhitterRadar()\nBuilds a radar-style chart to show a hitter’s strengths across multiple metrics. This makes it easier to compare performance categories visually."
   },
   {
     "objectID": "package.html#summary-of-webgem-package",
     "href": "package.html#summary-of-webgem-package",
-    "title": "package",
+    "title": "Conner Robertson",
     "section": "",
-    "text": "webgem is an R package designed to help users summarize and visualize baseball performance data. The package includes functions for ranking player metrics, creating hitter profiles, and building radar-style visualizations that make player strengths and weaknesses easier to compare and understand.\nFor deeper explanation and examples, visit the github repository \n\n\n\nYou can install the development version of webgem from GitHub with:\n# install.packages(\"remotes\")\n# install.packages(\"devtools\")\ndevtools::install_github(\"ADC-405-S26/webgem\")\nlibrary(webgem)"
+    "text": "webgem is an R package designed to help users summarize and visualize baseball performance data. The package includes functions for ranking player metrics, creating hitter profiles, and building radar-style visualizations that make player strengths and weaknesses easier to compare and understand.\nFor deeper explanation and examples, visit the github repository \n\n\n\n\nYou can install the development version of webgem from GitHub with:\n# install.packages(\"remotes\")\n# install.packages(\"devtools\")\ndevtools::install_github(\"ADC-405-S26/webgem\")\nlibrary(webgem)"
   },
   {
     "objectID": "package.html#hitterradar-examples",
     "href": "package.html#hitterradar-examples",
-    "title": "package",
+    "title": "Conner Robertson",
     "section": "hitterRadar examples",
     "text": "hitterRadar examples\ncode portion\n\nexample 1example 2example 3example 4\n\n\n\nlibrary(webgem)\n\nplayer_data &lt;- webgem_data[webgem_data$player == \"Drake Baldwin\", ]\n\nbaldwin_profile &lt;- hitterProfile(\n  player = player_data$player,\n  wrc_plus = player_data$wrc_plus,\n  bb_pct = player_data$bb_pct,\n  ops = player_data$ops,\n  slg = player_data$slg,\n  obp = player_data$obp\n)\n\nhitterRadar(baldwin_profile)\n\n\n\n\nplayer_data &lt;- webgem_data[webgem_data$player == \"Dillon Dingler\", ]\n\ndingler_profile &lt;- hitterProfile(\n  player = player_data$player,\n  slg = player_data$slg,\n  ops = player_data$ops,\n  avg = player_data$avg,\n  iso = player_data$iso,\n  obp = player_data$obp,\n  war = player_data$war\n)\n\nhitterRadar(dingler_profile)\n\n\n\n\nplayer_data &lt;- webgem_data[webgem_data$player == \"Rafael Devers\", ]\n\ndevers_profile &lt;- hitterProfile(\n  player = player_data$player,\n  ops = player_data$ops,\n  avg = player_data$avg,\n  woba = player_data$woba,\n  barrel_pct = player_data$iso,\n  iso = player_data$iso,\n  wrc_plus = player_data$wrc_plus\n)\n\nhitterRadar(devers_profile)\n\n\n\n\nplayer_data &lt;- webgem_data[webgem_data$player == \"Yordan Alvares\", ]\n\nalvares_profile &lt;- hitterProfile(\n  player = player_data$player,\n  avg = player_data$avg,\n  bb_pct = player_data$bb_pct,\n  hard_hit_pct = player_data$hard_hit_pct,\n  obp = player_data$obp,\n  wrc_plus = player_data$wrc_plus\n)\n\nhitterRadar(alvares_profile)\n\n\n\n\nplot portion\ncode ex. number correlates to the numbered plot\n\nexample 1example 2example 3example 4"
   },
@@ -236,5 +236,40 @@
     "title": "package",
     "section": "example 4",
     "text": "example 4\n\nplayer_data &lt;- webgem_data[webgem_data$player == \"Yordan Alvares\", ]\n\nalvares_profile &lt;- hitterProfile(\n  player = player_data$player,\n  avg = player_data$avg,\n  bb_pct = player_data$bb_pct,\n  hard_hit_pct = player_data$hard_hit_pct,\n  obp = player_data$obp,\n  wrc_plus = player_data$wrc_plus\n)\n\nhitterRadar(alvares_profile)\n\n:::\nplot portion\ncode ex. number correlates to the numbered plot\n\nexample 1example 2example 3example 4"
+  },
+  {
+    "objectID": "poster.html",
+    "href": "poster.html",
+    "title": "KFYO Poster Analysis",
+    "section": "",
+    "text": "Note\n\n\n\nThis was a joint project worked on with Nick Katz."
+  },
+  {
+    "objectID": "poster.html#poster-project",
+    "href": "poster.html#poster-project",
+    "title": "Conner Robertson",
+    "section": "",
+    "text": "Note\n\n\n\nThis was a joint project worked on with Nick Katz.\n\n\n\n\nThis poster project dives into the analysis of the KFYO article, which explores the problem with accessibility of player evaluation and pitch tracking in the game of baseball.\nView Poster PDF"
+  },
+  {
+    "objectID": "package.html#webgem-package",
+    "href": "package.html#webgem-package",
+    "title": "Conner Robertson",
+    "section": "",
+    "text": "webgem is an R package designed to help users summarize and visualize baseball performance data. The package includes functions for ranking player metrics, creating hitter profiles, and building radar-style visualizations that make player strengths and weaknesses easier to compare and understand.\nFor deeper explanation and examples, visit the github repository \n\n\n\n\nYou can install the development version of webgem from GitHub with:\n# install.packages(\"remotes\")\n# install.packages(\"devtools\")\ndevtools::install_github(\"ADC-405-S26/webgem\")\nlibrary(webgem)"
+  },
+  {
+    "objectID": "poster.html#article-snapshot",
+    "href": "poster.html#article-snapshot",
+    "title": "KFYO Poster Analysis",
+    "section": "Article Snapshot",
+    "text": "Article Snapshot\n\n\n\nMain Problem\nProfessional baseball tracking systems are powerful, but they are often expensive and difficult for amateur athletes, coaches, and smaller programs to access.\n\n\n\n\nCore Method\nThe researchers use a YOLO-based object detection model to identify baseballs and bats in video frames, then use tracking methods to estimate the ball’s movement.\n\n\n\n\nBig Idea\nThe goal is to create a lower-cost way to analyze pitch speed, trajectory, and movement from more accessible video sources."
+  },
+  {
+    "objectID": "poster.html#review-breakdown",
+    "href": "poster.html#review-breakdown",
+    "title": "KFYO Poster Analysis",
+    "section": "Review Breakdown",
+    "text": "Review Breakdown\n\nProblem & ObjectiveMethodologyLimitationsReflection\n\n\nThe article focuses on the accessibility gap in baseball performance technology. Major League Baseball and professional organizations have access to advanced systems that track pitch movement, spin, speed, and trajectory, but many amateur players and smaller programs do not.\nThe main objective is to explore whether machine learning can help analyze baseball video in a more affordable and scalable way.\n\n\nThe researchers use YOLOv12, an object detection model, to identify baseballs and bats in individual video frames. After detection, a Kalman filter helps predict the ball’s movement across frames when the ball is blurred, moving quickly, or temporarily difficult to detect.\nThe study also connects the tracking process to aerodynamic ideas such as gravity, drag, and Magnus force.\n\n\nOne important limitation is that baseballs are small, fast, and often blurred on camera, which makes detection difficult. The model also had more examples of bats than baseballs, creating an imbalance in the training data.\nAnother limitation is that the tracking process simplifies some real-world physics, so it may not perfectly represent every force acting on the baseball.\n\n\nThis article stood out because it shows how advanced machine learning can become when applied to a real-world sports problem. It also connects directly to baseball analytics, player development, and the future of accessible training technology."
   }
 ]
