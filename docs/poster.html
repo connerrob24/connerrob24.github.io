@@ -274,13 +274,14 @@ detected      detected       missed       predicted
 </div>
 </div>
 <hr>
-<section id="limitations" class="level3">
-<h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
-<p>One important limitation is that baseballs are small, fast, and often blurred on camera, which makes detection difficult. The model also had more examples of bats than baseballs, creating an imbalance in the training data.</p>
-<p>Another limitation is that the tracking process simplifies some real-world physics, so it may not perfectly represent every force acting on the baseball.</p>
-
-
 </section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<p>While the system was shown to have relatively strong performance (especially compared to previous models), several important limitations remain that the writers recommend be improved. One primary issue is the data imbalance: the model has more bat examples than ball examples. This is, of course, due to the nature of a baseball movement in the game, making it more difficult for the model to detect relative to the bat. With that, the ball-class recall for the system was 80%, meaning the model missed about 1 in 5 baseballs. They state that this misclassification happened most often when the ball was blurred or surrounded by background clutter.</p>
+<p>The other primary limitation was that the Kalman filter assumed a mostly constant velocity for the baseball’s motion, whereas in reality, it is affected by a multitude of real-world forces. They essentially somewhat simplified the physicis behind this movement. They state that this may potentially limit long-range trajectory prediction accuracy.Magnus forces, including gravity, drag, spin, and deceleration are a few of the forces that could be added with greater depth and specificty to increase the accuracy of the model’s predictions.</p>
+<p>Lastly, there were internal camera assumptions that somewhat limited videos would and wouldn’t be accurate. The speed estimates relied on a standard 18.4 m pitcher-to-catcher distance and a mostly frontal camera angle, which may not hold in amateur videos.</p>
+
+
 </section>
 
 </main> <!-- /main -->
